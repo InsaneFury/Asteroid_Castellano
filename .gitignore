@@ -5,5 +5,5 @@ Asteroids/[Bb]in/
 Asteroids/[Oo]bj/
 
 #Ignore .vs except .suo
-**\.vs
+**/.vs
 .vs\Asteroid\v15\!.suo
