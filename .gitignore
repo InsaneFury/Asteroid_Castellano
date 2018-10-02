@@ -1,4 +1,9 @@
-#Ignoring bin, obj
+#Ignore bin
 Asteroids/[Bb]in/
+
+#Ignore obj
 Asteroids/[Oo]bj/
-Asteroids/.vs/Asteroid/v15/!.suo/
+
+#Ignore .vs except .suo
+**/.vs
+.vs/Asteroid/v15/!.suo
