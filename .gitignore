@@ -1,0 +1,4 @@
+#Ignoring bin, obj
+Asteroids/[Bb]in/
+Asteroids/[Oo]bj/
+Asteroids/.vs/
