@@ -10,8 +10,13 @@ namespace asteroid {
 
 		Shoot shoot[PLAYER_MAX_SHOOTS];
 
-		void init() {
+		double SHOOT_SPEED = 1.5;
+		int SHOOT_LIFE_TIME = 300;
 
+		float timer = GetFrameTime();
+
+		void init() {
+			timer = 0;
 			for (int i = 0; i < PLAYER_MAX_SHOOTS; i++){
 				shoot[i].texture = LoadTexture("res/Textures/shoot.png");
 				shoot[i].position = { 0, 0 };
@@ -32,18 +37,22 @@ namespace asteroid {
 		}
 
 		void update() {
-			
+			timer += GetFrameTime();
+
 			// Player shoot logic
-			if (IsKeyPressed(KEY_SPACE)){
-				for (int i = 0; i < PLAYER_MAX_SHOOTS; i++){
-					if (!shoot[i].active){
-						shoot[i].position = {(float) (player.position.x + sin(player.rotation*DEG2RAD)*(player.texture.height)),(float)(player.position.y - cos(player.rotation*DEG2RAD)*(player.texture.height)) };
-						shoot[i].active = true;
-						shoot[i].destRec = { shoot[i].position.x, shoot[i].position.y, (float)shoot[i].texture.width, (float)shoot[i].texture.height };
-						shoot[i].speed.x = 1.5*sin(player.rotation*DEG2RAD)*PLAYER_SPEED;
-						shoot[i].speed.y = 1.5*cos(player.rotation*DEG2RAD)*PLAYER_SPEED;
-						shoot[i].rotation = player.rotation;
-						break;
+			if (IsKeyDown(KEY_SPACE)) {
+				if (timer > 0.2f) {
+					for (int i = 0; i < PLAYER_MAX_SHOOTS; i++) {
+						if (!shoot[i].active) {
+							shoot[i].position = { (float)(player.position.x + sin(player.rotation*DEG2RAD)*(player.texture.height)),(float)(player.position.y - cos(player.rotation*DEG2RAD)*(player.texture.height)) };
+							shoot[i].active = true;
+							shoot[i].destRec = { shoot[i].position.x, shoot[i].position.y, (float)shoot[i].texture.width, (float)shoot[i].texture.height };
+							shoot[i].speed.x = SHOOT_SPEED * sin(player.rotation*DEG2RAD)*PLAYER_SPEED;
+							shoot[i].speed.y = SHOOT_SPEED * cos(player.rotation*DEG2RAD)*PLAYER_SPEED;
+							shoot[i].rotation = player.rotation;
+							timer = 0.0f;
+							break;
+						}
 					}
 				}
 			}
@@ -57,8 +66,8 @@ namespace asteroid {
 			for (int i = 0; i < PLAYER_MAX_SHOOTS; i++){
 				if (shoot[i].active){
 					// Movement
-					shoot[i].position.x += shoot[i].speed.x;
-					shoot[i].position.y -= shoot[i].speed.y;
+					shoot[i].position.x += shoot[i].speed.x * GetFrameTime();
+					shoot[i].position.y -= shoot[i].speed.y * GetFrameTime();
 					shoot[i].destRec = { shoot[i].position.x, shoot[i].position.y, (float)shoot[i].texture.width, (float)shoot[i].texture.height };
 
 					// Collision logic: shoot vs walls
@@ -80,7 +89,7 @@ namespace asteroid {
 					}
 
 					// Life of shoot
-					if (shoot[i].lifeSpawn >= 240) {
+					if (shoot[i].lifeSpawn >= SHOOT_LIFE_TIME) {
 						shoot[i].position = { 0, 0 };
 						shoot[i].speed = { 0, 0 };
 						shoot[i].lifeSpawn = 0;

@@ -7,11 +7,15 @@ namespace asteroid {
 
 		Player player;
 
-		float PLAYER_SPEED = 1;
+		bool isMoving;
+
+		float PLAYER_SPEED = 500;
+		float PLAYER_ROTATION_SPEED = 300.0f;
 		static float timer; //Animations coming soon
 
 		void init() {
 			player.texture = LoadTexture("res/Textures/space_ship.png");
+			player.motor = LoadTexture("res/Textures/space_ship_motor.png");
 			player.position = { (float)GetScreenWidth() / 2 - player.texture.width / 2,(float)GetScreenHeight() / 2 - player.texture.height / 2 };
 			player.color = WHITE;
 			player.acceleration = 0;
@@ -19,6 +23,7 @@ namespace asteroid {
 			player.speed.x = 0;
 			player.speed.y = 0;
 			player.score = 0;
+			isMoving = false;
 
 			// NOTE: Source rectangle (part of the texture to use for drawing)
 			player.sourceRec = { 0.0f, 0.0f, (float)player.texture.width, (float)player.texture.height };
@@ -40,8 +45,8 @@ namespace asteroid {
 			timer += GetFrameTime();
 
 			// Player logic: rotation
-			if (IsKeyDown(KEY_A)) player.rotation -= 0.5f;
-			if (IsKeyDown(KEY_D)) player.rotation += 0.5f;
+			if (IsKeyDown(KEY_A)) player.rotation -= PLAYER_ROTATION_SPEED * GetFrameTime();
+			if (IsKeyDown(KEY_D)) player.rotation += PLAYER_ROTATION_SPEED * GetFrameTime();
 
 			// Player logic: speed
 			player.speed.x = sin(player.rotation*DEG2RAD)*PLAYER_SPEED;
@@ -50,12 +55,20 @@ namespace asteroid {
 			// Player logic: acceleration
 			if (IsKeyDown(KEY_W))
 			{
-				if (player.acceleration < 1) player.acceleration += 0.01f;
+				if (player.acceleration < 1) {
+					player.acceleration += 0.01f;
+					isMoving = true;
+				}
 			}
 			else
 			{
-				if (player.acceleration > 0) player.acceleration -= 0.01f;
-				else if (player.acceleration < 0) player.acceleration = 0;
+				isMoving = false;
+				if (player.acceleration > 0) {
+					player.acceleration -= 0.01f;
+				}
+				else if (player.acceleration < 0) {
+					player.acceleration = 0;
+				}
 			}
 			if (IsKeyDown(KEY_S))
 			{
@@ -64,8 +77,8 @@ namespace asteroid {
 			}
 
 			// Player logic: movement
-			player.position.x += (player.speed.x*player.acceleration);
-			player.position.y -= (player.speed.y*player.acceleration);
+			player.position.x += (player.speed.x*player.acceleration* GetFrameTime());
+			player.position.y -= (player.speed.y*player.acceleration* GetFrameTime());
 
 			// Collision logic: player vs walls
 			if (player.position.x > GetScreenWidth() + player.texture.height) player.position.x = -(player.texture.height);
@@ -80,11 +93,15 @@ namespace asteroid {
 
 		void draw() {
 			DrawTexturePro(player.texture,player.sourceRec,player.destRec,player.origin,player.rotation,player.color);
+			if (isMoving) {
+			DrawTexturePro(player.motor, player.sourceRec, player.destRec, player.origin, player.rotation, player.color);
+			}
 			gun::draw();
 		}
 
 		void deInit() {
 			UnloadTexture(player.texture);
+			UnloadTexture(player.motor);
 			gun::deInit();
 		}
 	}

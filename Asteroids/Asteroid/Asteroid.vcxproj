@@ -28,6 +28,7 @@
     <ClCompile Include="..\src\Scenes\gameOver.cpp" />
     <ClCompile Include="..\src\Scenes\gameplay.cpp" />
     <ClCompile Include="..\src\Scenes\menu.cpp" />
+    <ClCompile Include="..\src\Utility\animations.cpp" />
     <ClCompile Include="..\src\Utility\buttons.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +40,7 @@
     <ClInclude Include="..\src\Scenes\gameOver.h" />
     <ClInclude Include="..\src\Scenes\gameplay.h" />
     <ClInclude Include="..\src\Scenes\menu.h" />
+    <ClInclude Include="..\src\Utility\animations.h" />
     <ClInclude Include="..\src\Utility\buttons.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

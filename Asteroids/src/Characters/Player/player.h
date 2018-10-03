@@ -7,6 +7,7 @@ namespace asteroid {
 	namespace players {
 		struct Player {
 			Texture2D texture;
+			Texture2D motor;
 			Vector2 position;
 			Vector2 speed;
 			Color color;

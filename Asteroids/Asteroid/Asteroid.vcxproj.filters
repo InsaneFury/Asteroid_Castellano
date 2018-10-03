@@ -49,6 +49,9 @@
     <ClCompile Include="..\src\Characters\Player\gun.cpp">
       <Filter>Characters\Player</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Utility\animations.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Logic\game.h">
@@ -77,6 +80,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Characters\Player\gun.h">
       <Filter>Characters\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Utility\animations.h">
+      <Filter>Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
