@@ -8,6 +8,7 @@ namespace asteroid {
 		Color stars_1_color;
 		Color stars_2_color;
 		static float timer;
+		static float delayTime = 0.01f;
 		bool exchange_texture;
 
 		void init() {
@@ -23,20 +24,16 @@ namespace asteroid {
 
 		void update() {
 			timer += GetFrameTime();
-			if (timer > 0.1f && exchange_texture == false) {
+			if (timer > delayTime && exchange_texture == false) {
 				if (stars_1_color.a < 255) {
 					for (int i = 0; i < 255; i++) {
 						stars_1_color.a++;
 						timer = 0.0f;
 						break;
 					}
-					if (stars_1_color.a >= 255) {
-						exchange_texture == true;
-						timer = 0.0f;
-					}
 				}
-				else {
-					for (int i = 0; i >= 255; i--) {
+				if (stars_1_color.a >= 254) {
+					for (int i = 0; i <= 255; i--) {
 						stars_1_color.a--;
 						timer = 0.0f;
 						break;
@@ -47,20 +44,16 @@ namespace asteroid {
 					}
 				}
 			}
-			if (timer > 0.1f && exchange_texture == true) {
+			if (timer > delayTime && exchange_texture == true) {
 				if (stars_2_color.a < 255) {
-					for (int i = 0; i < 255; i++) {
+					for (int i = 0; i <= 255; i++) {
 						stars_2_color.a++;
 						timer = 0.0f;
 						break;
 					}
-					if (stars_2_color.a >= 255) {
-						exchange_texture == false;
-						timer = 0.0f;
-					}
 				}
-				else {
-					for (int i = 0; i > 255; i--) {
+				else if (stars_2_color.a >= 255) {
+					for (int i = 0; i <= 255; i++) {
 						stars_2_color.a--;
 						timer = 0.0f;
 						break;

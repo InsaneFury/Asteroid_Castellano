@@ -59,7 +59,7 @@ namespace asteroid {
 
 			// Shoot life timer
 			for (int i = 0; i < PLAYER_MAX_SHOOTS; i++){
-				if (shoot[i].active) shoot[i].lifeSpawn++;
+				if (shoot[i].active) shoot[i].lifeSpawn += 1 * GetFrameTime();
 			}
 
 			// Shot logic
