@@ -11,6 +11,7 @@ namespace asteroid {
 			Vector2 position;
 			Vector2 speed;
 			Color color;
+			float radius;
 			float rotation;
 			float acceleration;
 			int score;

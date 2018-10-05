@@ -21,6 +21,14 @@ namespace asteroid {
 			Vector2 origin;
 		};
 
+		extern const int MAX_BIG_METEORS;
+		extern const int MAX_MEDIUM_METEORS;
+		extern const int MAX_SMALL_METEORS;
+
+		extern Meteor bigMeteor[];
+		extern Meteor mediumMeteor[];
+		extern Meteor smallMeteor[];
+
 		void init();
 		void update();
 		void draw();

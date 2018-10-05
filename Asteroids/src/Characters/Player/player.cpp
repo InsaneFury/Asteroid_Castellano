@@ -1,10 +1,13 @@
 #include "player.h"
 #include "gun.h"
+#include "Characters\Enemys\asteroids.h"
+#include "Logic\game.h"
 #include <math.h>
 
 namespace asteroid {
 	namespace players {
-
+		using namespace asteroids;
+		using namespace game;
 		Player player;
 
 		bool isMoving;
@@ -22,6 +25,7 @@ namespace asteroid {
 			player.rotation = 0;
 			player.speed.x = 0;
 			player.speed.y = 0;
+			player.radius = (float)player.texture.width /2;
 			player.score = 0;
 			isMoving = false;
 
@@ -72,8 +76,12 @@ namespace asteroid {
 			}
 			if (IsKeyDown(KEY_S))
 			{
-				if (player.acceleration > 0) player.acceleration -= 0.01f;
-				else if (player.acceleration < 0) player.acceleration = 0;
+				if (player.acceleration > 0) {
+					player.acceleration -= 0.01f;
+				}
+				else if (player.acceleration < 0) {
+					player.acceleration = 0;
+				}
 			}
 
 			// Player logic: movement
@@ -85,6 +93,29 @@ namespace asteroid {
 			else if (player.position.x < -(player.texture.height)) player.position.x = GetScreenWidth() + player.texture.height;
 			if (player.position.y > (GetScreenHeight() + player.texture.height)) player.position.y = -(player.texture.height);
 			else if (player.position.y < -(player.texture.height)) player.position.y = GetScreenHeight() + player.texture.height;
+
+			// Collision logic: player vs meteors
+
+			for (int a = 0; a < MAX_BIG_METEORS; a++)
+			{
+				if (CheckCollisionCircles(player.position, player.radius, bigMeteor[a].position, bigMeteor[a].radius) && bigMeteor[a].active) {
+					actualScene = Gameover;
+				}
+			}
+
+			for (int a = 0; a < MAX_MEDIUM_METEORS; a++)
+			{
+				if (CheckCollisionCircles(player.position, player.radius, mediumMeteor[a].position, mediumMeteor[a].radius) && mediumMeteor[a].active) {
+					actualScene = Gameover;
+				}
+			}
+
+			for (int a = 0; a < MAX_SMALL_METEORS; a++)
+			{
+				if (CheckCollisionCircles(player.position, player.radius, smallMeteor[a].position, smallMeteor[a].radius) && smallMeteor[a].active) {
+					actualScene = Gameover;
+				}
+			}
 
 			player.destRec = { player.position.x, player.position.y, (float)player.texture.width, (float)player.texture.height };
 

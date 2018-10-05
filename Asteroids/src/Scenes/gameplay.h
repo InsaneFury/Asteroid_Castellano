@@ -6,7 +6,7 @@
 namespace asteroid {
 	namespace gameplay {
 		void init();
-		void update();
+		void update(bool &isGameOver);
 		void draw();
 		void deInit();
 	}

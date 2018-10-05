@@ -4,7 +4,7 @@
 namespace asteroid {
 	namespace gameOver {
 		void init();
-		void update(bool &endGame);
+		void update(bool &isGameOver);
 		void draw();
 	}
 }

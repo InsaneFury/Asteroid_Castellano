@@ -20,13 +20,13 @@ namespace asteroid {
 
 		ActualScene actualScene = Menu;
 
-		static bool endGame = false;
+		static bool isGameOver = false;
 
 		void runGame() {
 			init();
 
 			// Main game loop
-			while (!WindowShouldClose() && !endGame)
+			while (!WindowShouldClose() && !isGameOver)
 			{
 				update();
 				draw();
@@ -38,9 +38,14 @@ namespace asteroid {
 			//Initialization of all the game!
 			SetConfigFlags(FLAG_MSAA_4X_HINT);      // Enable Multi Sampling Anti Aliasing 4x (if available)
 			InitWindow(screenWidth, screenHeight, "Asteroid | by Ivan Castellano");
-			InitAudioDevice();
 			
+			#ifdef AUDIO
+			#define AUDIO
+			InitAudioDevice();
 			bgMusic = LoadMusicStream("res/Music/bgmusic.ogg");
+			#endif // !AUDIO
+
+			
 
 			menu::init();
 			gameplay::init();
@@ -58,16 +63,20 @@ namespace asteroid {
 		void update() {
 			// Update
 			//----------------------------------------------------------------------------------
+			#ifdef AUDIO
+			#define AUDIO
 			UpdateMusicStream(bgMusic);
+			#endif // AUDIO
+			
 			switch (actualScene) {
 			case Menu:
-				menu::update(endGame);
+				menu::update(isGameOver);
 				break;
 			case Game:
-				gameplay::update();
+				gameplay::update(isGameOver);
 				break;
 			case Gameover:
-				gameOver::update(endGame);
+				gameOver::update(isGameOver);
 				break;
 			case Credits:
 				credits::update();

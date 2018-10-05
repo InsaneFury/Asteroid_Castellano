@@ -38,7 +38,7 @@ namespace asteroid {
 			thick = 4; //Simple line
 		}
 
-		void update(bool &endGame) {
+		void update(bool &isGameOver) {
 
 			//mouse
 			Vector2 mousePoint = GetMousePosition();
@@ -57,7 +57,7 @@ namespace asteroid {
 			if (CheckCollisionPointRec(mousePoint, quit.size))
 			{
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-					endGame = true;
+					isGameOver = true;
 				}
 			}
 

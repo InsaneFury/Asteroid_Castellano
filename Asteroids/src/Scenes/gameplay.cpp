@@ -1,13 +1,13 @@
 #include "gameplay.h"
 #include "Logic/game.h"
-#include "Utility/buttons.h"
 #include "Utility/animations.h"
 #include "Characters\Player\player.h"
 #include "Characters\Enemys\asteroids.h"
-#include <math.h>
 
 namespace asteroid {
 	namespace gameplay {
+
+		bool pause = false;
 
 		void init() {
 			animations::init();
@@ -15,10 +15,18 @@ namespace asteroid {
 			asteroids::init();
 		}
 
-		void update() {
-			animations::update();
-			players::update();
-			asteroids::update();
+		void update(bool &isGameOver) {
+			if (!isGameOver){
+				if (IsKeyPressed('P')) {
+					pause = !pause;
+				}
+
+				if (!pause){
+					animations::update();
+					players::update();
+					asteroids::update();
+				}
+			}
 		}
 
 		void draw() {
