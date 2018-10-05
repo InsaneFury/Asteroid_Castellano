@@ -6,6 +6,7 @@ namespace asteroid {
 		void init();
 		void update(bool &isGameOver);
 		void draw();
+		void deInit();
 	}
 }
 #endif // !GAMEOVER_H

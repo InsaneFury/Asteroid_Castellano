@@ -8,41 +8,47 @@ namespace asteroid {
 		using namespace game;
 		using namespace gameplay;
 
-		buttons::BTN retry;
-		buttons::BTN menu;
-		buttons::BTN quit;
+		//Images
+		Texture2D gameover_bg;
+		Texture2D gameover_title;
 
-		Rectangle rec;
+		Vector2 title_position;
 
-		//Line pos
-		Vector2 startPos;
-		Vector2 endPos;
+		//Buttons
+		Texture2D gameover_retry;
+		Texture2D gameover_retryOnHover;
+		Texture2D gameover_menu;
+		Texture2D gameover_menuOnHover;
+		Texture2D gameover_quit;
+		Texture2D gameover_quitOnHover;
 
-		int lineThick; //Rec line
-		float thick; //Simple line
+		buttons::BTNTEX retry;
+		buttons::BTNTEX menu;
+		buttons::BTNTEX quit;
 
 		void init() {
-			buttons::createButton(retry, 80, 400, (float)(GetScreenWidth() / 2 - 200), (float)(GetScreenHeight() - 350), 5, 40, GRAY, DARKGRAY, SKYBLUE);
-			buttons::createButton(menu, 80, 400, (float)(GetScreenWidth() / 2 - 200), (float)(GetScreenHeight() - 260), 5, 40, GRAY, DARKGRAY, SKYBLUE);
-			buttons::createButton(quit, 80, 400, (float)(GetScreenWidth() / 2 - 200), (float)(GetScreenHeight() - 170), 5, 40, GRAY, DARKGRAY, SKYBLUE);
+			gameover_bg = LoadTexture("res/Textures/GAMEOVER_BG.png");
+			gameover_title = LoadTexture("res/Textures/GAMEOVER_TITLE.png");
 
-			rec.height = 150;
-			rec.width = 400;
-			rec.x = GetScreenWidth() / 2 - rec.width / 2;
-			rec.y = GetScreenHeight() / 2 - rec.height;
+			retry.btn_texture = LoadTexture("res/Textures/RETRYONHOVER_BTN.png");
+			retry.btnOnHover_texture = LoadTexture("res/Textures/RETRY_BTN.png");
+			menu.btn_texture = LoadTexture("res/Textures/MENUONHOVER_BTN.png");
+			menu.btnOnHover_texture = LoadTexture("res/Textures/MENU_BTN.png");
+			quit.btn_texture = LoadTexture("res/Textures/QUIT_BTN.png");
+			quit.btnOnHover_texture = LoadTexture("res/Textures/QUITONHOVER_BTN.png");
 
-			startPos = { (float)(rec.x) , (float)(GetScreenHeight() - 160) };
-			endPos = { (float)(rec.x + 400) , (float)(GetScreenHeight() - 160) };
+			title_position = { (float)(screenWidth / 2 - gameover_title.width / 2) + 10, (float)(screenHeight / 2 - gameover_title.height / 2) - 180 };
 
-			lineThick = 5; //Rec line
-			thick = 4; //Simple line
+			buttons::createButton(retry, retry.btn_texture.height, retry.btn_texture.width, (float)(GetScreenWidth() / 2 - retry.btn_texture.width / 2), (float)(GetScreenHeight() - 400), WHITE);
+			buttons::createButton(menu, menu.btn_texture.height, menu.btn_texture.width, (float)(GetScreenWidth() / 2 - menu.btn_texture.width / 2), (float)(GetScreenHeight() - 330), WHITE);
+			buttons::createButton(quit, quit.btn_texture.height, quit.btn_texture.width, (float)(GetScreenWidth() / 2 - quit.btn_texture.width / 2), (float)(GetScreenHeight() - 260), WHITE);
+
 		}
 
 		void update(bool &isGameOver) {
 
 			//mouse
 			Vector2 mousePoint = GetMousePosition();
-
 
 			buttons::isMouseOverButton(retry);
 			if (CheckCollisionPointRec(mousePoint, retry.size))
@@ -52,15 +58,6 @@ namespace asteroid {
 					gameplay::init();
 				}
 			}
-
-			buttons::isMouseOverButton(quit);
-			if (CheckCollisionPointRec(mousePoint, quit.size))
-			{
-				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-					isGameOver = true;
-				}
-			}
-
 			buttons::isMouseOverButton(menu);
 			if (CheckCollisionPointRec(mousePoint, menu.size))
 			{
@@ -69,18 +66,35 @@ namespace asteroid {
 					actualScene = Menu;
 				}
 			}
+			buttons::isMouseOverButton(quit);
+			if (CheckCollisionPointRec(mousePoint, quit.size))
+			{
+				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+					isGameOver = true;
+				}
+			}
 		}
 
 		void draw() {
 			ClearBackground(WHITE);
-
 			//Draw UI
-			DrawText("GAME OVER", GetScreenWidth() / 2 - MeasureText("GAME OVER",100)/2, GetScreenHeight() / 2 - 150, 100, GRAY);
+			DrawTexture(gameover_bg, 0, 0, WHITE);
+			DrawTextureEx(gameover_title, title_position, 0, 1, WHITE);
 
 			//Draw buttons
-			buttons::draw(retry, "RETRY");
-			buttons::draw(menu, "MENU");
-			buttons::draw(quit, "QUIT");
+			buttons::draw(retry);
+			buttons::draw(menu);
+			buttons::draw(quit);
+		}
+
+		void deInit() {
+			//images
+			UnloadTexture(gameover_bg);
+			UnloadTexture(gameover_title);
+			//buttons
+			UnloadTexture(retry.btn_texture);
+			UnloadTexture(menu.btn_texture);
+			UnloadTexture(quit.btn_texture);
 		}
 	}
 }

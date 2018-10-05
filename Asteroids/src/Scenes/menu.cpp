@@ -8,10 +8,7 @@ namespace asteroid {
 
 		//Images
 		Texture2D menu_bg;
-		Texture2D menu_astronaut;
-		Texture2D menu_title;
 
-		Vector2 astronaut_position;
 		Vector2 title_position;
 
 		//Buttons
@@ -27,11 +24,7 @@ namespace asteroid {
 		buttons::BTNTEX quit;
 
 		void init() {
-			menu_bg = LoadTexture("res/Textures/BG_MENU.png");
-			menu_astronaut = LoadTexture("res/Textures/ASTRONAUT_MENU.png");
-			menu_title = LoadTexture("res/Textures/TITLE_MENU.png");
-			astronaut_position = { (float)(screenWidth - menu_astronaut.width - 20), (float)(screenHeight - menu_astronaut.height - 20)};
-			title_position = { (float)(screenWidth/2 - menu_title.width / 2), (float)(screenHeight/2 - menu_title.height / 2)-150 };
+			menu_bg = LoadTexture("res/Textures/NEW_BG_MENU.png");
 
 			play.btn_texture = LoadTexture("res/Textures/PLAY_BTN.png");
 			credits.btn_texture = LoadTexture("res/Textures/CREDITS_BTN.png");
@@ -77,21 +70,17 @@ namespace asteroid {
 
 			//Draw UI
 			DrawTexture(menu_bg,0,0,WHITE);
-			DrawTextureEx(menu_astronaut,astronaut_position,0,1,WHITE);
-			DrawTextureEx(menu_title, title_position, 0, 1, WHITE);
 
 			//Draw buttons
 			buttons::draw(play);
 			buttons::draw(credits);
 			buttons::draw(quit);
-			DrawText("v1.0", screenWidth - 50, screenHeight - 20, 20, WHITE);
+			DrawText("v0.5", screenWidth - 50, screenHeight - 20, 20, WHITE);
 		}
 
 		void deInit() {
 			//images
 			UnloadTexture(menu_bg);
-			UnloadTexture(menu_astronaut);
-			UnloadTexture(menu_title);
 			//buttons
 			UnloadTexture(play.btn_texture);
 			UnloadTexture(credits.btn_texture);

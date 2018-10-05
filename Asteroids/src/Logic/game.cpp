@@ -3,6 +3,7 @@
 #include "Scenes/gameOver.h"
 #include "Scenes/gameplay.h"
 #include "Scenes/credits.h"
+#include "Utility\post_processing.h"
 
 namespace asteroid {
 	namespace game {
@@ -46,7 +47,7 @@ namespace asteroid {
 			#endif // !AUDIO
 
 			
-
+			postprocessing::init();
 			menu::init();
 			gameplay::init();
 			gameOver::init();
@@ -92,6 +93,8 @@ namespace asteroid {
 			BeginDrawing();
 
 			ClearBackground(RAYWHITE);
+
+			//postprocessing::draw();
 			switch (actualScene) {
 			case Menu:
 				menu::draw();
@@ -109,6 +112,7 @@ namespace asteroid {
 				DrawText("An error has occurred please contact a Dev", screenWidth / 2, screenHeight / 2, 20, RED);
 				break;
 			}
+			//EndShaderMode();
 			EndDrawing();
 		}
 
@@ -120,6 +124,7 @@ namespace asteroid {
 				UnloadMusicStream(bgMusic);
 				CloseAudioDevice();
 			#endif // !AUDIO
+				//postprocessing::deInit();
 				gameplay::deInit();
 				credits::deInit();
 				menu::deInit();
