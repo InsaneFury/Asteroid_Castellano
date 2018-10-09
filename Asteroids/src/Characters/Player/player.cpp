@@ -3,6 +3,7 @@
 #include "Characters\Enemys\asteroids.h"
 #include "Logic\game.h"
 #include <math.h>
+#include <iostream>
 
 namespace asteroid {
 	namespace players {
@@ -12,10 +13,14 @@ namespace asteroid {
 
 		bool isMoving;
 
-		float PLAYER_SPEED = 500;
+		int PLAYER_ORIENTATION = 90;
+		float PLAYER_SPEED = 400;
 		float PLAYER_ROTATION_SPEED = 300.0f;
 		static float timer; //Animations coming soon
-
+		
+		Vector2 mousePosition;
+		Vector2 U;
+		
 		void init() {
 			player.texture = LoadTexture("res/Textures/space_ship.png");
 			player.motor = LoadTexture("res/Textures/space_ship_motor.png");
@@ -28,6 +33,8 @@ namespace asteroid {
 			player.radius = (float)player.texture.width /2;
 			player.score = 0;
 			isMoving = false;
+
+			U = { 0, 0 };
 
 			// NOTE: Source rectangle (part of the texture to use for drawing)
 			player.sourceRec = { 0.0f, 0.0f, (float)player.texture.width, (float)player.texture.height };
@@ -48,19 +55,22 @@ namespace asteroid {
 		void update() {
 			timer += GetFrameTime();
 
-			// Player logic: rotation
-			if (IsKeyDown(KEY_A)) player.rotation -= PLAYER_ROTATION_SPEED * GetFrameTime();
-			if (IsKeyDown(KEY_D)) player.rotation += PLAYER_ROTATION_SPEED * GetFrameTime();
+			mousePosition = GetMousePosition();
 
+			//Distancia entre player y mouse
+			U = {  mousePosition.x - player.position.x  , mousePosition.y - player.position.y };
+
+			player.rotation = (atan2(U.y,U.x)*RAD2DEG) + PLAYER_ORIENTATION;
+		
 			// Player logic: speed
 			player.speed.x = sin(player.rotation*DEG2RAD)*PLAYER_SPEED;
 			player.speed.y = cos(player.rotation*DEG2RAD)*PLAYER_SPEED;
 
 			// Player logic: acceleration
-			if (IsKeyDown(KEY_W))
+			if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 			{
 				if (player.acceleration < 1) {
-					player.acceleration += 0.01f;
+					player.acceleration += 0.005f;
 					isMoving = true;
 				}
 			}
@@ -68,7 +78,7 @@ namespace asteroid {
 			{
 				isMoving = false;
 				if (player.acceleration > 0) {
-					player.acceleration -= 0.01f;
+					player.acceleration -= 0.001f ;
 				}
 				else if (player.acceleration < 0) {
 					player.acceleration = 0;

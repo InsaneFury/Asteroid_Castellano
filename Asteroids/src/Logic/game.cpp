@@ -47,7 +47,7 @@ namespace asteroid {
 			#endif // !AUDIO
 
 			
-			postprocessing::init();
+			//postprocessing::init();
 			menu::init();
 			gameplay::init();
 			gameOver::init();

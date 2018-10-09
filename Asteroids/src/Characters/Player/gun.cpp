@@ -40,7 +40,7 @@ namespace asteroid {
 			timer += GetFrameTime();
 
 			// Player shoot logic
-			if (IsKeyDown(KEY_SPACE)) {
+			if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON)) {
 				if (timer > 0.2f) {
 					for (int i = 0; i < PLAYER_MAX_SHOOTS; i++) {
 						if (!shoot[i].active) {
