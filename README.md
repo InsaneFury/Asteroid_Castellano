@@ -1,4 +1,4 @@
-﻿<img align="left" src="https://github.com/InsaneFury/Asteroid_Castellano/blob/master/Asteroids/res/readme/logo.png" width=256>
+﻿<img align="center" src="https://github.com/InsaneFury/Asteroid_Castellano/blob/master/Asteroids/res/readme/logo.png" width=512>
 
 # Hola!
 Soy **Ivan Castellano**. Este es mi segundo juego en raylib utilizando c++.
