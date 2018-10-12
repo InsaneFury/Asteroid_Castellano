@@ -1,11 +1,10 @@
 ﻿<img align="left" src="https://github.com/InsaneFury/Asteroid_Castellano/blob/master/Asteroids/res/readme/logo.png" width=256>
 
-#Hola!
+# Hola!
 Soy **Ivan Castellano**. Este es mi segundo juego en raylib utilizando c++.
 
 
 # Skills
------------------------
 -**C++/C# Programmer**
 -**Graphic Designer**
 -**Photographer**
@@ -13,9 +12,8 @@ Soy **Ivan Castellano**. Este es mi segundo juego en raylib utilizando c++.
 -**UI | UX Designer**
 -**Music & SFX for games and apps designer**
 
-## Social Networks
------------------------
-[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&label=Follow)](https://twitter.com/IvanCaastellano)
-[![Instagram URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&label=Follow)](https://www.instagram.com/ivancastellanoo)
-[![Facebook URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&label=Follow)](https://www.facebook.com/ivanignaciocastellano)
+# Social Networks
+[![Twitter URL](https://img.shields.io/badge/Facebook--blue.svg?longCache=true&style=flat-square)](https://twitter.com/IvanCaastellano)
+[![Instagram URL](https://img.shields.io/badge/Instagram--ff69b4.svg?longCache=true&style=flat-square)](https://www.instagram.com/ivancastellanoo)
+[![Facebook URL](https://img.shields.io/badge/Facebook--blue.svg?longCache=true&style=flat-square)](https://www.facebook.com/ivanignaciocastellano)
 [![Soundcloud URL](https://img.shields.io/badge/Soundcloud--yellow.svg?longCache=true&style=flat-square)](https://soundcloud.com/justdarsan)
