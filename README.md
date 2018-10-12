@@ -1,4 +1,4 @@
-﻿<img align="left" src="https://github.com/InsaneFury/Asteroid_Castellano/tree/master/Asteroids/res/readme/logo.png" width=256>
+﻿<img align="left" src="https://github.com/InsaneFury/Asteroid_Castellano/blob/master/Asteroids/res/readme/logo.png" width=256>
 
 
 Hi! I'm your first Markdown file in **StackEdit**. If you want to learn about StackEdit, you can read me. If you want to play with Markdown, you can edit me. Once you have finished with me, you can create new files by opening the **file explorer** on the left corner of the navigation bar.
