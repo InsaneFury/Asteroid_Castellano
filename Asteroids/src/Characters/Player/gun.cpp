@@ -1,6 +1,9 @@
 #include "gun.h"
+
+#include <cmath>
+
 #include "player.h"
-#include <math.h>
+
 
 namespace asteroid {
 	namespace gun {

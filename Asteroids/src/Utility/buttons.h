@@ -1,5 +1,6 @@
 #ifndef BUTTONS_H
 #define BUTTONS_H
+
 #include "raylib.h"
 
 namespace asteroid {

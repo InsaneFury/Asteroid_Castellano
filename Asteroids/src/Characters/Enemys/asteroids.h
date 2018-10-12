@@ -2,6 +2,7 @@
 #define ASTEROIDS_H
 
 #include "raylib.h"
+
 namespace asteroid {
 	namespace asteroids {
 		struct Meteor {

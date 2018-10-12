@@ -1,4 +1,5 @@
 #include "animations.h"
+
 namespace asteroid {
 	namespace animations {
 

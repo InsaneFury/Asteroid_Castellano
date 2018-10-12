@@ -1,7 +1,9 @@
 #include "asteroids.h"
+
+#include <cmath>
+
 #include "Characters\Player\player.h"
 #include "Characters\Player\gun.h"
-#include <math.h>
 
 namespace asteroid {
 	namespace asteroids {

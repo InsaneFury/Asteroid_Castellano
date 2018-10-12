@@ -1,9 +1,11 @@
 #include "player.h"
+
+#include <cmath>
+#include <iostream>
+
 #include "gun.h"
 #include "Characters\Enemys\asteroids.h"
 #include "Logic\game.h"
-#include <math.h>
-#include <iostream>
 
 namespace asteroid {
 	namespace players {
@@ -20,7 +22,9 @@ namespace asteroid {
 		
 		Vector2 mousePosition;
 		Vector2 U;
-		
+		float UNormalized;
+
+
 		void init() {
 			player.texture = LoadTexture("res/Textures/space_ship.png");
 			player.motor = LoadTexture("res/Textures/space_ship_motor.png");
@@ -35,6 +39,7 @@ namespace asteroid {
 			isMoving = false;
 
 			U = { 0, 0 };
+			UNormalized = 0.0f;
 
 			// NOTE: Source rectangle (part of the texture to use for drawing)
 			player.sourceRec = { 0.0f, 0.0f, (float)player.texture.width, (float)player.texture.height };
@@ -63,40 +68,28 @@ namespace asteroid {
 			player.rotation = (atan2(U.y,U.x)*RAD2DEG) + PLAYER_ORIENTATION;
 		
 			// Player logic: speed
-			player.speed.x = sin(player.rotation*DEG2RAD)*PLAYER_SPEED;
-			player.speed.y = cos(player.rotation*DEG2RAD)*PLAYER_SPEED;
+			player.speed.x = sin(player.rotation*DEG2RAD);
+			player.speed.y = cos(player.rotation*DEG2RAD);
 
 			// Player logic: acceleration
 			if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 			{
-				if (player.acceleration < 1) {
-					player.acceleration += 0.005f;
-					isMoving = true;
-				}
+				UNormalized = (U.x, U.y) / sqrt(pow(U.x, 2) + pow(U.y, 2));
+				player.acceleration += UNormalized;
+
+				// Player logic: movement
+				player.position.x += (player.speed.x* GetFrameTime());
+				player.position.y += (player.speed.y* GetFrameTime());
+
+				isMoving = true;
 			}
 			else
 			{
 				isMoving = false;
-				if (player.acceleration > 0) {
-					player.acceleration -= 0.001f ;
-				}
-				else if (player.acceleration < 0) {
-					player.acceleration = 0;
-				}
 			}
-			if (IsKeyDown(KEY_S))
-			{
-				if (player.acceleration > 0) {
-					player.acceleration -= 0.01f;
-				}
-				else if (player.acceleration < 0) {
-					player.acceleration = 0;
-				}
-			}
-
-			// Player logic: movement
-			player.position.x += (player.speed.x*player.acceleration* GetFrameTime());
-			player.position.y -= (player.speed.y*player.acceleration* GetFrameTime());
+			
+			player.position.x += player.acceleration* GetFrameTime();
+			player.position.y += player.acceleration* GetFrameTime();
 
 			// Collision logic: player vs walls
 			if (player.position.x > GetScreenWidth() + player.texture.height) player.position.x = -(player.texture.height);
