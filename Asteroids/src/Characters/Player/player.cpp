@@ -16,13 +16,13 @@ namespace asteroid {
 		bool isMoving;
 
 		int PLAYER_ORIENTATION = 90;
-		float PLAYER_SPEED = 400;
+		float PLAYER_SPEED = 100;
 		float PLAYER_ROTATION_SPEED = 300.0f;
 		static float timer; //Animations coming soon
 		
 		Vector2 mousePosition;
 		Vector2 U;
-		float UNormalized;
+		Vector2 UNormalized;
 
 
 		void init() {
@@ -30,7 +30,7 @@ namespace asteroid {
 			player.motor = LoadTexture("res/Textures/space_ship_motor.png");
 			player.position = { (float)GetScreenWidth() / 2 - player.texture.width / 2,(float)GetScreenHeight() / 2 - player.texture.height / 2 };
 			player.color = WHITE;
-			player.acceleration = 0;
+			player.acceleration = {0,0};
 			player.rotation = 0;
 			player.speed.x = 0;
 			player.speed.y = 0;
@@ -39,7 +39,7 @@ namespace asteroid {
 			isMoving = false;
 
 			U = { 0, 0 };
-			UNormalized = 0.0f;
+			UNormalized = { 0,0 };
 
 			// NOTE: Source rectangle (part of the texture to use for drawing)
 			player.sourceRec = { 0.0f, 0.0f, (float)player.texture.width, (float)player.texture.height };
@@ -66,30 +66,25 @@ namespace asteroid {
 			U = {  mousePosition.x - player.position.x  , mousePosition.y - player.position.y };
 
 			player.rotation = (atan2(U.y,U.x)*RAD2DEG) + PLAYER_ORIENTATION;
-		
-			// Player logic: speed
-			player.speed.x = sin(player.rotation*DEG2RAD);
-			player.speed.y = cos(player.rotation*DEG2RAD);
-
+	
 			// Player logic: acceleration
-			if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
-			{
-				UNormalized = (U.x, U.y) / sqrt(pow(U.x, 2) + pow(U.y, 2));
-				player.acceleration += UNormalized;
-
-				// Player logic: movement
-				player.position.x += (player.speed.x* GetFrameTime());
-				player.position.y += (player.speed.y* GetFrameTime());
+			if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && player.acceleration.x < PLAYER_SPEED && player.acceleration.y < PLAYER_SPEED){
+				float modU = sqrt(pow(U.x, 2) + pow(U.y, 2));
+				UNormalized.x = U.x / modU;
+				UNormalized.y = U.y / modU;
+				player.acceleration.x += UNormalized.x;
+				player.acceleration.y += UNormalized.y;
 
 				isMoving = true;
 			}
-			else
-			{
+			else {
+				player.acceleration.x = player.acceleration.x - 1;
+				player.acceleration.y = player.acceleration.y - 1;
 				isMoving = false;
 			}
 			
-			player.position.x += player.acceleration* GetFrameTime();
-			player.position.y += player.acceleration* GetFrameTime();
+			player.position.x += player.acceleration.x* GetFrameTime();
+			player.position.y += player.acceleration.y* GetFrameTime();
 
 			// Collision logic: player vs walls
 			if (player.position.x > GetScreenWidth() + player.texture.height) player.position.x = -(player.texture.height);

@@ -13,7 +13,7 @@ namespace asteroid {
 			Color color;
 			float radius;
 			float rotation;
-			float acceleration;
+			Vector2 acceleration;
 			int score;
 			//Stuff to use DrawTexturePro
 			// NOTE: Source rectangle (part of the texture to use for drawing)
