@@ -5,12 +5,12 @@ Soy **Ivan Castellano**. Este es mi segundo juego en raylib utilizando c++.
 
 
 # Skills
--**C++/C# Programmer**
--**Graphic Designer**
--**Photographer**
--**Web frontend dev**
--**UI | UX Designer**
--**Music & SFX for games and apps designer**
+- **C++/C# Programmer**
+- **Graphic Designer**
+- **Photographer**
+- **Web frontend dev**
+- **UI | UX Designer**
+- **Music & SFX for games and apps designer**
 
 # Social Networks
 [![Twitter URL](https://img.shields.io/badge/Twitter--cyan.svg?longCache=true&style=flat-square)](https://twitter.com/IvanCaastellano)
