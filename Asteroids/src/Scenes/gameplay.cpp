@@ -6,6 +6,7 @@
 #include "Characters\Player\player.h"
 #include "Characters\Enemys\asteroids.h"
 #include "Utility\buttons.h"
+#include "Scenes\victory.h"
 
 namespace asteroid {
 	namespace gameplay {
@@ -41,8 +42,7 @@ namespace asteroid {
 						}
 					}
 				}
-				
-
+		
 				if (!pause){
 					animations::update();
 					players::update();
@@ -51,6 +51,9 @@ namespace asteroid {
 				else {
 					pause_menu::update(isGameOver);
 				}
+				/*if (victory) {
+
+				}*/
 			}
 		}
 
@@ -58,6 +61,7 @@ namespace asteroid {
 			animations::draw();
 			players::draw();
 			asteroids::draw();
+			DrawText(FormatText("SCORE: %02i", asteroids::destroyedMeteorsCount), GetScreenWidth()/2 - MeasureText("SCORE: 00", 40)/2, 50,40, WHITE);
 			if (pause == false) {
 				buttons::draw(pause_btn);
 			}

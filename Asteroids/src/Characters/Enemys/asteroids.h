@@ -22,6 +22,8 @@ namespace asteroid {
 			Vector2 origin;
 		};
 
+		extern int destroyedMeteorsCount;
+		extern bool victory;
 		extern const int MAX_BIG_METEORS;
 		extern const int MAX_MEDIUM_METEORS;
 		extern const int MAX_SMALL_METEORS;

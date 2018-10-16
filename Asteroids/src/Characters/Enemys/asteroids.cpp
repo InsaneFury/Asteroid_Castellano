@@ -1,6 +1,7 @@
 #include "asteroids.h"
 
 #include <cmath>
+#include <iostream>
 
 #include "Characters\Player\player.h"
 #include "Characters\Player\gun.h"
@@ -22,7 +23,7 @@ namespace asteroid {
 
 		static int midMeteorsCount;
 		static int smallMeteorsCount;
-		static int destroyedMeteorsCount;
+		int destroyedMeteorsCount;
 
 		static int posx, posy;
 		static int velx, vely;
@@ -279,6 +280,10 @@ namespace asteroid {
 					}
 				}
 			}
+			if (destroyedMeteorsCount == 15) {
+				victory = true;
+			}
+			std::cout << destroyedMeteorsCount << std::endl;
 		}
 
 

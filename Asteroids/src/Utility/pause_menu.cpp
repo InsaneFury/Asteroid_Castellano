@@ -3,6 +3,7 @@
 #include "Scenes/gameplay.h"
 #include "Logic/game.h"
 #include "buttons.h"
+#include "Logic\game.h"
 
 namespace asteroid {
 	namespace pause_menu {
@@ -19,11 +20,14 @@ namespace asteroid {
 		buttons::BTNTEX retry;
 		buttons::BTNTEX menu;
 		buttons::BTNTEX quit;
+		buttons::BTNTEX mute;
+		buttons::BTNTEX unmute;
+
+		static bool isPlaying;
 
 		void init() {
 			pause_bg = LoadTexture("res/Textures/PAUSE_BG.png");
 			pause_title = LoadTexture("res/Textures/PAUSE_TITLE.png");
-
 
 			resume.btn_texture = LoadTexture("res/Textures/RESUMEONHOVER_BTN.png");
 			resume.btnOnHover_texture = LoadTexture("res/Textures/RESUME_BTN.png");
@@ -33,6 +37,10 @@ namespace asteroid {
 			menu.btnOnHover_texture = LoadTexture("res/Textures/MENU_BTN.png");
 			quit.btn_texture = LoadTexture("res/Textures/QUIT_BTN.png");
 			quit.btnOnHover_texture = LoadTexture("res/Textures/QUITONHOVER_BTN.png");
+			mute.btn_texture = LoadTexture("res/Textures/MUTE_BTN.png");
+			mute.btnOnHover_texture = LoadTexture("res/Textures/MUTE_BTN.png");
+			unmute.btn_texture = LoadTexture("res/Textures/MUTEON_BTN.png");
+			unmute.btnOnHover_texture = LoadTexture("res/Textures/MUTEON_BTN.png");
 
 			title_position = { (float)(screenWidth / 2 - pause_title.width / 2) + 10, (float)(screenHeight / 2 - pause_title.height / 2) - 180 };
 
@@ -40,7 +48,10 @@ namespace asteroid {
 			buttons::createButton(retry, retry.btn_texture.height, retry.btn_texture.width, (float)(GetScreenWidth() / 2 - retry.btn_texture.width / 2), (float)(GetScreenHeight() - 330), WHITE);
 			buttons::createButton(menu, menu.btn_texture.height, menu.btn_texture.width, (float)(GetScreenWidth() / 2 - menu.btn_texture.width / 2), (float)(GetScreenHeight() - 260), WHITE);
 			buttons::createButton(quit, quit.btn_texture.height, quit.btn_texture.width, (float)(GetScreenWidth() / 2 - quit.btn_texture.width / 2), (float)(GetScreenHeight() - 190), WHITE);
+			buttons::createButton(mute, mute.btn_texture.height, mute.btn_texture.width, (float)(GetScreenWidth() / 2 - mute.btn_texture.width / 2), (float)(GetScreenHeight() - 120), WHITE);
+			buttons::createButton(unmute, unmute.btn_texture.height, unmute.btn_texture.width, (float)(GetScreenWidth() / 2 - unmute.btn_texture.width / 2), (float)(GetScreenHeight() - 120), WHITE);
 
+			isPlaying = true;
 		}
 
 		void update(bool &isGameOver) {
@@ -78,6 +89,20 @@ namespace asteroid {
 					isGameOver = true;
 				}
 			}
+			buttons::isMouseOverButton(mute);
+			if (CheckCollisionPointRec(mousePoint, mute.size))
+			{
+				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+					if (isPlaying) {
+						PauseMusicStream(bgMusic);
+						isPlaying = false;
+					}
+					else {
+						PlayMusicStream(bgMusic);
+						isPlaying = true;
+					}
+				}
+			}
 		}
 
 		void draw() {
@@ -90,6 +115,12 @@ namespace asteroid {
 			buttons::draw(retry);
 			buttons::draw(menu);
 			buttons::draw(quit);
+			if (isPlaying) {
+				buttons::draw(mute);
+			}
+			else {
+				buttons::draw(unmute);
+			}	
 		}
 
 		void deInit() {
@@ -101,6 +132,8 @@ namespace asteroid {
 			UnloadTexture(retry.btn_texture);
 			UnloadTexture(menu.btn_texture);
 			UnloadTexture(quit.btn_texture);
+			UnloadTexture(mute.btn_texture);
+			UnloadTexture(unmute.btn_texture);
 		}
 	}
 }

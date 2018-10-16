@@ -3,7 +3,7 @@
 
 #include "raylib.h"
 
-//#define AUDIO
+#define AUDIO
 
 namespace asteroid {
 	namespace game {
@@ -18,7 +18,7 @@ namespace asteroid {
 		};
 
 		extern ActualScene actualScene;
-
+		extern Music bgMusic;
 		void runGame();
 	}
 }

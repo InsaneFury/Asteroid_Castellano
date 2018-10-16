@@ -15,14 +15,6 @@ namespace asteroid {
 
 		Vector2 title_position;
 
-		//Buttons
-		Texture2D gameover_retry;
-		Texture2D gameover_retryOnHover;
-		Texture2D gameover_menu;
-		Texture2D gameover_menuOnHover;
-		Texture2D gameover_quit;
-		Texture2D gameover_quitOnHover;
-
 		buttons::BTNTEX retry;
 		buttons::BTNTEX menu;
 		buttons::BTNTEX quit;
