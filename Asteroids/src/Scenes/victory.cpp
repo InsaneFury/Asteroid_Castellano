@@ -3,6 +3,7 @@
 #include "gameplay.h"
 #include "Logic/game.h"
 #include "Utility/buttons.h"
+#include "Characters\Enemys\asteroids.h"
 
 namespace asteroid {
 	namespace victory {
@@ -15,13 +16,15 @@ namespace asteroid {
 
 		Vector2 title_position;
 
+		int LEVEL1 = 25;
+
 		buttons::BTNTEX retry;
 		buttons::BTNTEX menu;
 		buttons::BTNTEX quit;
 
 		void init() {
 			gameover_bg = LoadTexture("res/Textures/GAMEOVER_BG.png");
-			gameover_title = LoadTexture("res/Textures/GAMEOVER_TITLE.png");
+			gameover_title = LoadTexture("res/Textures/VICTORY.png");
 
 			retry.btn_texture = LoadTexture("res/Textures/RETRYONHOVER_BTN.png");
 			retry.btnOnHover_texture = LoadTexture("res/Textures/RETRY_BTN.png");
@@ -88,6 +91,15 @@ namespace asteroid {
 			UnloadTexture(retry.btn_texture);
 			UnloadTexture(menu.btn_texture);
 			UnloadTexture(quit.btn_texture);
+		}
+
+		bool isVictory() {
+			if (asteroids::destroyedMeteorsCount >= LEVEL1) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 	}
 }

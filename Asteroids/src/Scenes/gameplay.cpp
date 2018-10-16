@@ -28,6 +28,7 @@ namespace asteroid {
 			players::init();
 			asteroids::init();
 			pause_menu::init();
+			victory::init();
 		}
 
 		void update(bool &isGameOver) {
@@ -51,9 +52,9 @@ namespace asteroid {
 				else {
 					pause_menu::update(isGameOver);
 				}
-				/*if (victory) {
-
-				}*/
+				if (victory::isVictory()) {
+					victory::update(isGameOver);
+				}
 			}
 		}
 
@@ -69,12 +70,16 @@ namespace asteroid {
 			if (pause) {
 				pause_menu::draw();
 			}
+			if (victory::isVictory()) {
+				victory::draw();
+			}
 			BeginBlendMode(BLEND_MULTIPLIED);
 			DrawTexture(gameplay_vintage, 0, 0, WHITE);
 			EndBlendMode();
 		}
 
 		void deInit() {
+			victory::deInit();
 			pause_menu::deInit();
 			animations::deInit();
 			players::deInit();

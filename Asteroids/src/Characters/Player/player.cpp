@@ -6,6 +6,7 @@
 #include "gun.h"
 #include "Characters\Enemys\asteroids.h"
 #include "Logic\game.h"
+#include "Scenes\victory.h"
 
 namespace asteroid {
 	namespace players {
@@ -95,21 +96,27 @@ namespace asteroid {
 			for (int a = 0; a < MAX_BIG_METEORS; a++)
 			{
 				if (CheckCollisionCircles(player.position, player.radius, bigMeteor[a].position, bigMeteor[a].radius) && bigMeteor[a].active) {
-					actualScene = Gameover;
+					if (!victory::isVictory()) {
+						actualScene = Gameover;
+					}	
 				}
 			}
 
 			for (int a = 0; a < MAX_MEDIUM_METEORS; a++)
 			{
 				if (CheckCollisionCircles(player.position, player.radius, mediumMeteor[a].position, mediumMeteor[a].radius) && mediumMeteor[a].active) {
-					actualScene = Gameover;
+					if (!victory::isVictory()) {
+						actualScene = Gameover;
+					}
 				}
 			}
 
 			for (int a = 0; a < MAX_SMALL_METEORS; a++)
 			{
 				if (CheckCollisionCircles(player.position, player.radius, smallMeteor[a].position, smallMeteor[a].radius) && smallMeteor[a].active) {
-					actualScene = Gameover;
+					if (!victory::isVictory()) {
+						actualScene = Gameover;
+					}
 				}
 			}
 
