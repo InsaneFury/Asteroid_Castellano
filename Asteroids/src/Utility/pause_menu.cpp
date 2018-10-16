@@ -71,6 +71,8 @@ namespace asteroid {
 			{
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 					actualScene = Game;
+					pause_menu::pause = false;
+					gameplay::tutorial = true;
 					gameplay::init();
 				}
 			}
@@ -79,7 +81,10 @@ namespace asteroid {
 			{
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 					gameplay::init();
+					pause_menu::pause = false;
+					gameplay::tutorial = true;
 					actualScene = Menu;
+
 				}
 			}
 			buttons::isMouseOverButton(quit);

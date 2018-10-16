@@ -11,7 +11,7 @@ namespace asteroid {
 		void deInit();
 
 		extern bool pause;
-
+		extern bool tutorial;
 	}
 }
 #endif // !GAMEPLAY_H

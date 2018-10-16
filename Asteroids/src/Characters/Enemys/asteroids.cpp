@@ -283,7 +283,6 @@ namespace asteroid {
 			if (destroyedMeteorsCount == 15) {
 				victory = true;
 			}
-			std::cout << destroyedMeteorsCount << std::endl;
 		}
 
 

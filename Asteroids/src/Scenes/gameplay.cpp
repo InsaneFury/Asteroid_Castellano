@@ -12,7 +12,10 @@ namespace asteroid {
 	namespace gameplay {
 
 		bool pause = false;
+		bool tutorial = true;
+
 		Texture2D gameplay_vintage;
+		Texture2D gameplay_tutorial;
 
 		buttons::BTNTEX pause_btn;
 
@@ -24,15 +27,19 @@ namespace asteroid {
 			buttons::createButton(pause_btn, pause_btn.btn_texture.height, pause_btn.btn_texture.width, (float)(GetScreenWidth() - pause_btn.btn_texture.width - pause_btn.btn_texture.width/2), (float)(pause_btn.btn_texture.height/2), WHITE);
 
 			gameplay_vintage = LoadTexture("res/Textures/VINTAGE.png");
+			gameplay_tutorial = LoadTexture("res/Textures/tutorial.png");
 			animations::init();
 			players::init();
 			asteroids::init();
 			pause_menu::init();
 			victory::init();
+
 		}
 
 		void update(bool &isGameOver) {
+
 			if (!isGameOver){
+
 				mousePoint = GetMousePosition();
 				if (pause == false) {
 					buttons::isMouseOverButton(pause_btn);
@@ -43,8 +50,11 @@ namespace asteroid {
 						}
 					}
 				}
+				if (IsKeyPressed(KEY_SPACE)) {
+					tutorial = false;
+				}
 		
-				if (!pause){
+				if (!pause && tutorial == false){
 					animations::update();
 					players::update();
 					asteroids::update();
@@ -59,20 +69,28 @@ namespace asteroid {
 		}
 
 		void draw() {
-			animations::draw();
-			players::draw();
-			asteroids::draw();
-			DrawText(FormatText("SCORE: %02i", asteroids::destroyedMeteorsCount), GetScreenWidth()/2 - MeasureText("SCORE: 00", 40)/2, 50,40, WHITE);
-			if (pause == false) {
-				buttons::draw(pause_btn);
+			if (tutorial) {		
+				DrawTexture(gameplay_tutorial, 0, 0, WHITE);
 			}
+			else {
+				animations::draw();
+				players::draw();
+				asteroids::draw();
+				DrawText(FormatText("SCORE: %02i", asteroids::destroyedMeteorsCount), GetScreenWidth() / 2 - MeasureText("SCORE: 00", 40) / 2, 50, 40, WHITE);
+				if (pause == false) {
+					buttons::draw(pause_btn);
+				}
+
+				if (pause) {
+					pause_menu::draw();
+				}
+				if (victory::isVictory()) {
+					victory::draw();
+				}
+			}
+				
 			
-			if (pause) {
-				pause_menu::draw();
-			}
-			if (victory::isVictory()) {
-				victory::draw();
-			}
+
 			BeginBlendMode(BLEND_MULTIPLIED);
 			DrawTexture(gameplay_vintage, 0, 0, WHITE);
 			EndBlendMode();
@@ -85,6 +103,7 @@ namespace asteroid {
 			players::deInit();
 			asteroids::deInit();
 			UnloadTexture(gameplay_vintage);
+			UnloadTexture(gameplay_tutorial);
 			UnloadTexture(pause_btn.btn_texture);
 		}
 	}
