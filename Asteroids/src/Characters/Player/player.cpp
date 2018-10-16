@@ -68,7 +68,7 @@ namespace asteroid {
 			player.rotation = (atan2(U.y,U.x)*RAD2DEG) + PLAYER_ORIENTATION;
 	
 			// Player logic: acceleration
-			if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && player.acceleration.x < PLAYER_SPEED && player.acceleration.y < PLAYER_SPEED){
+			if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)){
 				float modU = sqrt(pow(U.x, 2) + pow(U.y, 2));
 				UNormalized.x = U.x / modU;
 				UNormalized.y = U.y / modU;
@@ -78,8 +78,6 @@ namespace asteroid {
 				isMoving = true;
 			}
 			else {
-				player.acceleration.x = player.acceleration.x - 1;
-				player.acceleration.y = player.acceleration.y - 1;
 				isMoving = false;
 			}
 			

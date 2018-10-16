@@ -12,14 +12,6 @@ namespace asteroid {
 
 		Vector2 title_position;
 
-		//Buttons
-		Texture2D menu_play;
-		Texture2D menu_playOnHover;
-		Texture2D menu_credits;
-		Texture2D menu_creditsOnHover;
-		Texture2D menu_exit;
-		Texture2D menu_exitOnHover;
-
 		buttons::BTNTEX play;
 		buttons::BTNTEX credits;
 		buttons::BTNTEX quit;
@@ -76,7 +68,7 @@ namespace asteroid {
 			buttons::draw(play);
 			buttons::draw(credits);
 			buttons::draw(quit);
-			DrawText("v0.5", screenWidth - 50, screenHeight - 20, 20, WHITE);
+			DrawText("v1.0", screenWidth - 50, screenHeight - 20, 20, WHITE);
 		}
 
 		void deInit() {

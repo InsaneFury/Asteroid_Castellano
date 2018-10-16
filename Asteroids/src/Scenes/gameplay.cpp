@@ -1,9 +1,11 @@
 #include "gameplay.h"
 
+#include "Utility\pause_menu.h"
 #include "Logic/game.h"
 #include "Utility/animations.h"
 #include "Characters\Player\player.h"
 #include "Characters\Enemys\asteroids.h"
+#include "Utility\buttons.h"
 
 namespace asteroid {
 	namespace gameplay {
@@ -11,23 +13,43 @@ namespace asteroid {
 		bool pause = false;
 		Texture2D gameplay_vintage;
 
+		buttons::BTNTEX pause_btn;
+
+		Vector2 mousePoint;
+
 		void init() {
+			pause_btn.btn_texture = LoadTexture("res/Textures/PAUSE_BTN.png");
+			pause_btn.btnOnHover_texture = LoadTexture("res/Textures/PAUSEONHOVER_BTN.png");
+			buttons::createButton(pause_btn, pause_btn.btn_texture.height, pause_btn.btn_texture.width, (float)(GetScreenWidth() - pause_btn.btn_texture.width - pause_btn.btn_texture.width/2), (float)(pause_btn.btn_texture.height/2), WHITE);
+
 			gameplay_vintage = LoadTexture("res/Textures/VINTAGE.png");
 			animations::init();
 			players::init();
 			asteroids::init();
+			pause_menu::init();
 		}
 
 		void update(bool &isGameOver) {
 			if (!isGameOver){
-				if (IsKeyPressed('P')) {
-					pause = !pause;
+				mousePoint = GetMousePosition();
+				if (pause == false) {
+					buttons::isMouseOverButton(pause_btn);
+					if (CheckCollisionPointRec(mousePoint, pause_btn.size))
+					{
+						if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+							pause = !pause;
+						}
+					}
 				}
+				
 
 				if (!pause){
 					animations::update();
 					players::update();
 					asteroids::update();
+				}
+				else {
+					pause_menu::update(isGameOver);
 				}
 			}
 		}
@@ -36,8 +58,12 @@ namespace asteroid {
 			animations::draw();
 			players::draw();
 			asteroids::draw();
+			if (pause == false) {
+				buttons::draw(pause_btn);
+			}
+			
 			if (pause) {
-				DrawText("PAUSE", (float)GetScreenWidth() / 2 - MeasureText("PAUSE", 50)/2, (float)GetScreenHeight()/2 - 25, 50, WHITE);
+				pause_menu::draw();
 			}
 			BeginBlendMode(BLEND_MULTIPLIED);
 			DrawTexture(gameplay_vintage, 0, 0, WHITE);
@@ -45,10 +71,12 @@ namespace asteroid {
 		}
 
 		void deInit() {
+			pause_menu::deInit();
 			animations::deInit();
 			players::deInit();
 			asteroids::deInit();
 			UnloadTexture(gameplay_vintage);
+			UnloadTexture(pause_btn.btn_texture);
 		}
 	}
 }

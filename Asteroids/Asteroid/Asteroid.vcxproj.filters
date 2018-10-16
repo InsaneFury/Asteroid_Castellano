@@ -55,6 +55,9 @@
     <ClCompile Include="..\src\Utility\post_processing.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Utility\pause_menu.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Logic\game.h">
@@ -88,6 +91,9 @@
       <Filter>Utility</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Utility\post_processing.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Utility\pause_menu.h">
       <Filter>Utility</Filter>
     </ClInclude>
   </ItemGroup>

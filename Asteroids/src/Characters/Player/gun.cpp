@@ -4,7 +4,6 @@
 
 #include "player.h"
 
-
 namespace asteroid {
 	namespace gun {
 		using namespace players;
@@ -13,7 +12,7 @@ namespace asteroid {
 
 		Shoot shoot[PLAYER_MAX_SHOOTS];
 
-		double SHOOT_SPEED = 1.5;
+		double SHOOT_SPEED = 10;
 		int SHOOT_LIFE_TIME = 300;
 
 		float timer = GetFrameTime();
