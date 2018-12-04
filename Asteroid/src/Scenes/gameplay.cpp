@@ -11,8 +11,8 @@
 namespace asteroid {
 	namespace gameplay {
 
-		bool pause = false;
-		bool tutorial = true;
+		bool pause;
+		bool tutorial;
 
 		static Texture2D gameplay_vintage;
 		static Texture2D gameplay_tutorial;
@@ -21,7 +21,17 @@ namespace asteroid {
 
 		static Vector2 mouse_point;
 
+		static float timer;
+		static float delayTime;
+
 		void init() {
+
+			timer = 0.0f;
+			
+
+			pause = false;
+			tutorial = true;
+
 			pause_btn.btn_texture = LoadTexture("res/Textures/PAUSE_BTN.png");
 			pause_btn.btnOnHover_texture = LoadTexture("res/Textures/PAUSEONHOVER_BTN.png");
 			buttons::createButton(
@@ -44,15 +54,20 @@ namespace asteroid {
 
 		void update(bool &isGameOver) {
 
+			timer += GetFrameTime();
+			delayTime = 2.0f;
+
 			if (!isGameOver){
 
 				mouse_point = GetMousePosition();
+
 				if (pause == false && tutorial == false) {
 					buttons::isMouseOverButton(pause_btn);
 					if (CheckCollisionPointRec(mouse_point, pause_btn.size))
 					{
 						if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 							pause = !pause;
+							timer = 0;
 						}
 					}
 				}
@@ -62,8 +77,10 @@ namespace asteroid {
 		
 				if (!pause && tutorial == false){
 					animations::update();
-					players::update();
-					asteroids::update();
+					if (timer >= delayTime) {
+						players::update();
+						asteroids::update();
+					}	
 				}
 				else if (tutorial == false) {
 					pause_menu::update(isGameOver);
@@ -80,25 +97,49 @@ namespace asteroid {
 			}
 			else {
 				animations::draw();
-				players::draw();
-				asteroids::draw();
 
-				DrawText(
-					FormatText("SCORE: %02i", asteroids::destroyedMeteorsCount),
-					GetScreenWidth() / 2 - MeasureText("SCORE: 00", 40) / 2,
-					50,
-					40,
-					WHITE);
+				if (timer <= delayTime && !pause) {
+					DrawText(
+						"READY!?",
+						GetScreenWidth() / 2 - MeasureText("READY!?", 100) / 2,
+						150,
+						100,
+						WHITE);
+					players::draw();
+					asteroids::draw();
+				}
+				else{
+					if (timer <= delayTime + 2.0f && !pause) {
+						DrawText(
+							"GO!!",
+							GetScreenWidth() / 2 - MeasureText("GO!!", 100) / 2,
+							150,
+							100,
+							WHITE);
 
+					}
+					
+					players::draw();
+					asteroids::draw();
+
+					DrawText(
+						FormatText("SCORE: %02i", asteroids::destroyedMeteorsCount),
+						GetScreenWidth() / 2 - MeasureText("SCORE: 00", 40) / 2,
+						50,
+						40,
+						WHITE);
+				}
 				if (pause == false) {
 					buttons::draw(pause_btn);
 				}
 
 				if (pause) {
 					pause_menu::draw();
+					timer = 0;
 				}
 				if (victory::isVictory()) {
 					victory::draw();
+					timer = 0;
 				}
 			}
 				
