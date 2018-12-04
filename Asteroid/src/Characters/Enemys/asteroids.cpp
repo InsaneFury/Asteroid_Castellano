@@ -33,7 +33,6 @@ namespace asteroid {
 		static int posx, posy;
 		static int velx, vely;
 		
-		static bool correctRange;
 		static int safeZone;
 		static bool victory;
 		static bool pause;
@@ -78,18 +77,14 @@ namespace asteroid {
 
 				bigMeteor[i].position = { (float)posx,(float)posy };
 
-				correctRange = false;
 				velx = GetRandomValue(-METEORS_SPEED, METEORS_SPEED);
 				vely = GetRandomValue(-METEORS_SPEED, METEORS_SPEED);
 
-				while (!correctRange) {
-
-					if (velx == 0 && vely == 0) {
-						velx = GetRandomValue(-METEORS_SPEED, METEORS_SPEED);
-						vely = GetRandomValue(-METEORS_SPEED, METEORS_SPEED);
-					}
-
-					else correctRange = true;
+				if (velx == 0) {
+					velx = METEORS_SPEED / 2;
+				}
+				if (vely == 0) {
+					vely = METEORS_SPEED / 2;
 				}
 
 				bigMeteor[i].speed = { (float)velx, (float)vely };
@@ -461,7 +456,6 @@ namespace asteroid {
 		void init() {
 
 			safeZone = 250;
-			correctRange = false;
 			victory = false;
 			pause = false;
 			destroyedMeteorsCount = 0;

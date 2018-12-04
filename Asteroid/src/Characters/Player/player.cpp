@@ -105,20 +105,20 @@ namespace asteroid {
 			player.position.y += player.acceleration.y* GetFrameTime();
 
 			// Collision logic: player vs walls
-			if (player.position.x > GetScreenWidth() + player.texture.height) {
-				player.position.x = -(player.texture.height);
+			if (player.position.x > GetScreenWidth() + player.radius) {
+				player.position.x = -(player.radius);
 			}
 
-			else if (player.position.x < -(player.texture.height)) {
-				player.position.x = GetScreenWidth() + player.texture.height;
+			else if (player.position.x < -(player.radius)) {
+				player.position.x = GetScreenWidth() + player.radius;
 			}
 
-			if (player.position.y > (GetScreenHeight() + player.texture.height)) {
-				player.position.y = -(player.texture.height);
+			if (player.position.y > (GetScreenHeight() + player.radius)) {
+				player.position.y = -(player.radius);
 			}
 
-			else if (player.position.y < -(player.texture.height)) {
-				player.position.y = GetScreenHeight() + player.texture.height;
+			else if (player.position.y < -(player.radius)) {
+				player.position.y = GetScreenHeight() + player.radius;
 			}
 
 			// Collision logic: player vs meteors
