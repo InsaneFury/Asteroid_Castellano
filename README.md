@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="256" src="https://github.com/InsaneFury/Asteroid_Castellano/blob/master/Asteroids/res/readme/logo.png">
+  <img width="256" src="https://github.com/InsaneFury/Asteroid_Castellano/blob/master/readmeRes/logo.png">
 </p>
 
 # Hello!
