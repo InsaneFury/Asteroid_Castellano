@@ -1,4 +1,4 @@
-#include "gameOver.h"
+#include "game_over.h"
 
 #include "gameplay.h"
 #include "Logic/game.h"

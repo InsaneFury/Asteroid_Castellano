@@ -25,7 +25,7 @@
     <ClCompile Include="..\src\Logic\game.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Scenes\credits.cpp" />
-    <ClCompile Include="..\src\Scenes\gameOver.cpp" />
+    <ClCompile Include="..\src\Scenes\game_over.cpp" />
     <ClCompile Include="..\src\Scenes\gameplay.cpp" />
     <ClCompile Include="..\src\Scenes\menu.cpp" />
     <ClCompile Include="..\src\Scenes\victory.cpp" />
@@ -40,7 +40,7 @@
     <ClInclude Include="..\src\Characters\Player\player.h" />
     <ClInclude Include="..\src\Logic\game.h" />
     <ClInclude Include="..\src\Scenes\credits.h" />
-    <ClInclude Include="..\src\Scenes\gameOver.h" />
+    <ClInclude Include="..\src\Scenes\game_over.h" />
     <ClInclude Include="..\src\Scenes\gameplay.h" />
     <ClInclude Include="..\src\Scenes\menu.h" />
     <ClInclude Include="..\src\Scenes\victory.h" />

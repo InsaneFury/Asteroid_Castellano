@@ -3,7 +3,7 @@
 #include "Scenes/gameplay.h"
 #include "Logic/game.h"
 #include "buttons.h"
-#include "Logic\game.h"
+#include "Logic/game.h"
 
 namespace asteroid {
 	namespace pause_menu {

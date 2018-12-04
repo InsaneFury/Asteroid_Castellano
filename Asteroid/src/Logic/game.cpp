@@ -1,10 +1,10 @@
 #include "game.h"
 
 #include "Scenes/menu.h"
-#include "Scenes/gameOver.h"
+#include "Scenes/game_over.h"
 #include "Scenes/gameplay.h"
 #include "Scenes/credits.h"
-#include "Utility\post_processing.h"
+#include "Utility/post_processing.h"
 
 namespace asteroid {
 	namespace game {

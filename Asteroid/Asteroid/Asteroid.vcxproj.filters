@@ -21,9 +21,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Scenes\gameOver.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Logic\game.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
@@ -61,13 +58,13 @@
     <ClCompile Include="..\src\Scenes\victory.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Scenes\game_over.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Logic\game.h">
       <Filter>Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Scenes\gameOver.h">
-      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Scenes\gameplay.h">
       <Filter>Scenes</Filter>
@@ -100,6 +97,9 @@
       <Filter>Utility</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Scenes\victory.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Scenes\game_over.h">
       <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>

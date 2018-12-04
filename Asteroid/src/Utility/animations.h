@@ -1,8 +1,6 @@
 #ifndef ANIMATIONS_H
 #define ANIMATIONS_H
 
-#include "raylib.h"
-
 	namespace asteroid {
 		namespace animations {
 			void init();

@@ -1,12 +1,12 @@
 #include "gameplay.h"
 
-#include "Utility\pause_menu.h"
+#include "Utility/pause_menu.h"
 #include "Logic/game.h"
 #include "Utility/animations.h"
-#include "Characters\Player\player.h"
-#include "Characters\Enemys\asteroids.h"
-#include "Utility\buttons.h"
-#include "Scenes\victory.h"
+#include "Characters/Player/player.h"
+#include "Characters/Enemys/asteroids.h"
+#include "Utility/buttons.h"
+#include "Scenes/victory.h"
 
 namespace asteroid {
 	namespace gameplay {

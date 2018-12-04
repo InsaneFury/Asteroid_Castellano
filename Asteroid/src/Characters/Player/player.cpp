@@ -4,9 +4,9 @@
 #include <iostream>
 
 #include "gun.h"
-#include "Characters\Enemys\asteroids.h"
-#include "Logic\game.h"
-#include "Scenes\victory.h"
+#include "Characters/Enemys/asteroids.h"
+#include "Logic/game.h"
+#include "Scenes/victory.h"
 
 namespace asteroid {
 	namespace players {

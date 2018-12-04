@@ -1,5 +1,5 @@
-#ifndef GAMEOVER_H
-#define GAMEOVER_H
+#ifndef GAME_OVER_H
+#define GAME_OVER_H
 
 namespace asteroid {
 	namespace gameOver {
@@ -9,6 +9,6 @@ namespace asteroid {
 		void deInit();
 	}
 }
-#endif // !GAMEOVER_H
+#endif // !GAME_OVER_H
 
 

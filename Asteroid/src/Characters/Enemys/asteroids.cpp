@@ -13,9 +13,9 @@ namespace asteroid {
 
 		static const int METEORS_SPEED = 150;
 		static const float METEOR_ROTATION_SPEED = 100.0f;
-		const int MAX_BIG_METEORS = 6;
-		const int MAX_MEDIUM_METEORS = 12;
-		const int MAX_SMALL_METEORS = 24;
+		static const int MAX_BIG_METEORS = 6;
+		static const int MAX_MEDIUM_METEORS = 12;
+		static const int MAX_SMALL_METEORS = 24;
 
 		Meteor bigMeteor[MAX_BIG_METEORS];
 		Meteor mediumMeteor[MAX_MEDIUM_METEORS];
@@ -32,9 +32,9 @@ namespace asteroid {
 		static int posx, posy;
 		static int velx, vely;
 		
-		bool correctRange;
-		bool victory;
-		bool pause;
+		static bool correctRange;
+		static bool victory;
+		static bool pause;
 
 		void init() {
 
@@ -44,7 +44,8 @@ namespace asteroid {
 			destroyedMeteorsCount = 0;
 
 			bigMeteorTex = LoadTexture("res/Textures/BIG_METEOR.png");
-
+			mediumMeteorTex = LoadTexture("res/Textures/MEDIUM_METEOR.png");
+			smallMeteorTex = LoadTexture("res/Textures/SMALL_METEOR.png");
 
 			for (int i = 0; i < MAX_BIG_METEORS; i++){
 

@@ -1,5 +1,7 @@
 #include "animations.h"
 
+#include "raylib.h"
+
 namespace asteroid {
 	namespace animations {
 

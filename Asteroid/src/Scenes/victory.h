@@ -1,5 +1,5 @@
-#ifndef GAMEOVER_H
-#define GAMEOVER_H
+#ifndef VICTORY_H
+#define VICTORY_H
 
 namespace asteroid {
 	namespace victory {
@@ -10,4 +10,4 @@ namespace asteroid {
 		bool isVictory();
 	}
 }
-#endif // !GAMEOVER_H
+#endif // !VICTORY_H

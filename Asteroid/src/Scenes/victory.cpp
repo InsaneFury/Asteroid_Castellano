@@ -3,7 +3,7 @@
 #include "gameplay.h"
 #include "Logic/game.h"
 #include "Utility/buttons.h"
-#include "Characters\Enemys\asteroids.h"
+#include "Characters/Enemys/asteroids.h"
 
 namespace asteroid {
 	namespace victory {
