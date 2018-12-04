@@ -37,25 +37,16 @@ namespace asteroid {
 		static bool victory;
 		static bool pause;
 
-		void init() {
+		static void initMeteor() {
 
-			safeZone = 250;
-			correctRange = false;
-			victory = false;
-			pause = false;
-			destroyedMeteorsCount = 0;
-
-			bigMeteorTex = LoadTexture("res/Textures/BIG_METEOR.png");
-			mediumMeteorTex = LoadTexture("res/Textures/MEDIUM_METEOR.png");
-			smallMeteorTex = LoadTexture("res/Textures/SMALL_METEOR.png");
-
-			for (int i = 0; i < MAX_BIG_METEORS; i++){
+			//Big Meteors
+			for (int i = 0; i < MAX_BIG_METEORS; i++) {
 
 				posx = GetRandomValue(0, GetScreenWidth());
 
-				while (!correctRange){
+				while (!correctRange) {
 
-					if (posx > GetScreenWidth() / 2 - safeZone && 
+					if (posx > GetScreenWidth() / 2 - safeZone &&
 						posx < GetScreenWidth() / 2 + safeZone) {
 
 						posx = GetRandomValue(0, GetScreenWidth());
@@ -69,9 +60,9 @@ namespace asteroid {
 
 				posy = GetRandomValue(0, GetScreenHeight());
 
-				while (!correctRange){
+				while (!correctRange) {
 
-					if (posy > GetScreenHeight() / 2 - safeZone && 
+					if (posy > GetScreenHeight() / 2 - safeZone &&
 						posy < GetScreenHeight() / 2 + safeZone) {
 
 						posy = GetRandomValue(0, GetScreenHeight());
@@ -87,9 +78,9 @@ namespace asteroid {
 				velx = GetRandomValue(-METEORS_SPEED, METEORS_SPEED);
 				vely = GetRandomValue(-METEORS_SPEED, METEORS_SPEED);
 
-				while (!correctRange){
+				while (!correctRange) {
 
-					if (velx == 0 && vely == 0){
+					if (velx == 0 && vely == 0) {
 						velx = GetRandomValue(-METEORS_SPEED, METEORS_SPEED);
 						vely = GetRandomValue(-METEORS_SPEED, METEORS_SPEED);
 					}
@@ -103,29 +94,30 @@ namespace asteroid {
 				bigMeteor[i].color = WHITE;
 
 				// NOTE: Source rectangle (part of the texture to use for drawing)
-				bigMeteor[i].sourceRec = { 
-					0.0f, 
-					0.0f, 
+				bigMeteor[i].sourceRec = {
+					0.0f,
+					0.0f,
 					(float)bigMeteorTex.width,
 					(float)bigMeteorTex.height
 				};
 
 				// NOTE: Destination rectangle (screen rectangle where drawing part of texture)
-				bigMeteor[i].destRec = { 
-					bigMeteor[i].position.x, 
-					bigMeteor[i].position.y, 
+				bigMeteor[i].destRec = {
+					bigMeteor[i].position.x,
+					bigMeteor[i].position.y,
 					(float)bigMeteorTex.width,
 					(float)bigMeteorTex.height
 				};
 
 				// NOTE: Origin of the texture (rotation/scale point), it's relative to destination rectangle size
-				bigMeteor[i].origin = { 
+				bigMeteor[i].origin = {
 					(float)bigMeteorTex.width / 2,
 					(float)bigMeteorTex.height / 2
 				};
 			}
 
-			for (int i = 0; i < MAX_MEDIUM_METEORS; i++){
+			//Medium Meteors
+			for (int i = 0; i < MAX_MEDIUM_METEORS; i++) {
 
 				mediumMeteor[i].position = { -100, -100 };
 				mediumMeteor[i].speed = { 0, 0 };
@@ -134,29 +126,30 @@ namespace asteroid {
 				mediumMeteor[i].color = WHITE;
 
 				// NOTE: Source rectangle (part of the texture to use for drawing)
-				mediumMeteor[i].sourceRec = { 
-					0.0f, 
-					0.0f, 
+				mediumMeteor[i].sourceRec = {
+					0.0f,
+					0.0f,
 					(float)mediumMeteorTex.width,
 					(float)mediumMeteorTex.height
 				};
 
 				// NOTE: Destination rectangle (screen rectangle where drawing part of texture)
 				mediumMeteor[i].destRec = {
-					mediumMeteor[i].position.x, 
-					mediumMeteor[i].position.y, 
+					mediumMeteor[i].position.x,
+					mediumMeteor[i].position.y,
 					(float)mediumMeteorTex.width,
 					(float)mediumMeteorTex.height
 				};
 
 				// NOTE: Origin of the texture (rotation/scale point), it's relative to destination rectangle size
-				mediumMeteor[i].origin = { 
+				mediumMeteor[i].origin = {
 					(float)mediumMeteorTex.width / 2,
 					(float)mediumMeteorTex.height / 2
 				};
 			}
 
-			for (int i = 0; i < MAX_SMALL_METEORS; i++){
+			//Small Meteors
+			for (int i = 0; i < MAX_SMALL_METEORS; i++) {
 
 				smallMeteor[i].position = { -100, -100 };
 				smallMeteor[i].speed = { 0, 0 };
@@ -165,36 +158,34 @@ namespace asteroid {
 				smallMeteor[i].color = WHITE;
 
 				// NOTE: Source rectangle (part of the texture to use for drawing)
-				smallMeteor[i].sourceRec = { 
-					0.0f, 
-					0.0f, 
+				smallMeteor[i].sourceRec = {
+					0.0f,
+					0.0f,
 					(float)smallMeteorTex.width,
 					(float)smallMeteorTex.height
 				};
 
 				// NOTE: Destination rectangle (screen rectangle where drawing part of texture)
-				smallMeteor[i].destRec = { 
-					smallMeteor[i].position.x, 
-					smallMeteor[i].position.y, 
+				smallMeteor[i].destRec = {
+					smallMeteor[i].position.x,
+					smallMeteor[i].position.y,
 					(float)smallMeteorTex.width,
 					(float)smallMeteorTex.height
 				};
 
 				// NOTE: Origin of the texture (rotation/scale point), it's relative to destination rectangle size
-				smallMeteor[i].origin = { 
+				smallMeteor[i].origin = {
 					(float)smallMeteorTex.width / 2,
 					(float)smallMeteorTex.height / 2
 				};
 			}
 
-			midMeteorsCount = 0;
-			smallMeteorsCount = 0;
 		}
 
-		void update() {
+		static void updateMeteor() {
 			// Meteors logic: big meteors
-			for (int i = 0; i < MAX_BIG_METEORS; i++){
-				if (bigMeteor[i].active){
+			for (int i = 0; i < MAX_BIG_METEORS; i++) {
+				if (bigMeteor[i].active) {
 					//Rotation
 					bigMeteor[i].rotation += METEOR_ROTATION_SPEED * GetFrameTime();
 
@@ -217,9 +208,9 @@ namespace asteroid {
 					}
 				}
 
-				bigMeteor[i].destRec = { 
+				bigMeteor[i].destRec = {
 					bigMeteor[i].position.x,
-					bigMeteor[i].position.y, 
+					bigMeteor[i].position.y,
 					(float)bigMeteorTex.width,
 					(float)bigMeteorTex.height
 				};
@@ -227,8 +218,8 @@ namespace asteroid {
 			}
 
 			// Meteors logic: medium meteors
-			for (int i = 0; i < MAX_MEDIUM_METEORS; i++){
-				if (mediumMeteor[i].active){
+			for (int i = 0; i < MAX_MEDIUM_METEORS; i++) {
+				if (mediumMeteor[i].active) {
 					//Rotation
 					mediumMeteor[i].rotation += METEOR_ROTATION_SPEED * GetFrameTime();
 
@@ -251,8 +242,8 @@ namespace asteroid {
 					}
 				}
 
-				mediumMeteor[i].destRec = { 
-					mediumMeteor[i].position.x, 
+				mediumMeteor[i].destRec = {
+					mediumMeteor[i].position.x,
 					mediumMeteor[i].position.y,
 					(float)mediumMeteorTex.width,
 					(float)mediumMeteorTex.height
@@ -261,8 +252,8 @@ namespace asteroid {
 			}
 
 			// Meteors logic: small meteors
-			for (int i = 0; i < MAX_SMALL_METEORS; i++){
-				if (smallMeteor[i].active){
+			for (int i = 0; i < MAX_SMALL_METEORS; i++) {
+				if (smallMeteor[i].active) {
 					//Rotation
 					smallMeteor[i].rotation += METEOR_ROTATION_SPEED * GetFrameTime();
 
@@ -285,54 +276,54 @@ namespace asteroid {
 					}
 				}
 
-				smallMeteor[i].destRec = { 
-					smallMeteor[i].position.x, 
-					smallMeteor[i].position.y, 
-					(float)smallMeteorTex.width, 
-					(float)smallMeteorTex.height 
+				smallMeteor[i].destRec = {
+					smallMeteor[i].position.x,
+					smallMeteor[i].position.y,
+					(float)smallMeteorTex.width,
+					(float)smallMeteorTex.height
 				};
 
 			}
 
 			// Collision logic: player-shoots vs meteors
-			for (int i = 0; i < PLAYER_MAX_SHOOTS; i++){
-				if ((shoot[i].active)){
-					for (int a = 0; a < MAX_BIG_METEORS; a++){
+			for (int i = 0; i < PLAYER_MAX_SHOOTS; i++) {
+				if ((shoot[i].active)) {
+					for (int a = 0; a < MAX_BIG_METEORS; a++) {
 						if (bigMeteor[a].active &&
 							CheckCollisionCircles(
 								shoot[i].position,
-								shoot[i].radius, 
-								bigMeteor[a].position, 
-								bigMeteor[a].radius)){
+								shoot[i].radius,
+								bigMeteor[a].position,
+								bigMeteor[a].radius)) {
 
 							shoot[i].active = false;
 							shoot[i].lifeSpawn = 0;
 							bigMeteor[a].active = false;
 							destroyedMeteorsCount++;
 
-							for (int j = 0; j < 2; j++){
-								if (midMeteorsCount % 2 == 0){
+							for (int j = 0; j < 2; j++) {
+								if (midMeteorsCount % 2 == 0) {
 
-									mediumMeteor[midMeteorsCount].position = { 
-										bigMeteor[a].position.x, 
-										bigMeteor[a].position.y 
+									mediumMeteor[midMeteorsCount].position = {
+										bigMeteor[a].position.x,
+										bigMeteor[a].position.y
 									};
 
-									mediumMeteor[midMeteorsCount].speed = { 
-									  (float)(cos(shoot[i].rotation*DEG2RAD)*METEORS_SPEED*-1), 
-									  (float)(sin(shoot[i].rotation*DEG2RAD)*METEORS_SPEED*-1) 
+									mediumMeteor[midMeteorsCount].speed = {
+									  (float)(cos(shoot[i].rotation*DEG2RAD)*METEORS_SPEED*-1),
+									  (float)(sin(shoot[i].rotation*DEG2RAD)*METEORS_SPEED*-1)
 									};
 
 								}
 								else {
-									mediumMeteor[midMeteorsCount].position ={ 
-										bigMeteor[a].position.x, 
-										bigMeteor[a].position.y 
+									mediumMeteor[midMeteorsCount].position = {
+										bigMeteor[a].position.x,
+										bigMeteor[a].position.y
 									};
 
-									mediumMeteor[midMeteorsCount].speed = { 
-									  (float)(cos(shoot[i].rotation*DEG2RAD)*METEORS_SPEED), 
-									  (float)(sin(shoot[i].rotation*DEG2RAD)*METEORS_SPEED) 
+									mediumMeteor[midMeteorsCount].speed = {
+									  (float)(cos(shoot[i].rotation*DEG2RAD)*METEORS_SPEED),
+									  (float)(sin(shoot[i].rotation*DEG2RAD)*METEORS_SPEED)
 									};
 
 								}
@@ -345,44 +336,44 @@ namespace asteroid {
 						}
 					}
 
-					for (int b = 0; b < MAX_MEDIUM_METEORS; b++){
+					for (int b = 0; b < MAX_MEDIUM_METEORS; b++) {
 
-						if (mediumMeteor[b].active && 
+						if (mediumMeteor[b].active &&
 							CheckCollisionCircles(
-								shoot[i].position, 
-								shoot[i].radius, 
-							    mediumMeteor[b].position, 
-								mediumMeteor[b].radius)){
+								shoot[i].position,
+								shoot[i].radius,
+								mediumMeteor[b].position,
+								mediumMeteor[b].radius)) {
 
 							shoot[i].active = false;
 							shoot[i].lifeSpawn = 0;
 							mediumMeteor[b].active = false;
 							destroyedMeteorsCount++;
 
-							for (int j = 0; j < 2; j++){
-								if (smallMeteorsCount % 2 == 0){
+							for (int j = 0; j < 2; j++) {
+								if (smallMeteorsCount % 2 == 0) {
 
-									smallMeteor[smallMeteorsCount].position = { 
-										mediumMeteor[b].position.x, 
-										mediumMeteor[b].position.y 
+									smallMeteor[smallMeteorsCount].position = {
+										mediumMeteor[b].position.x,
+										mediumMeteor[b].position.y
 									};
 
-									smallMeteor[smallMeteorsCount].speed = { 
-									  (float)(cos(shoot[i].rotation*DEG2RAD)*METEORS_SPEED*-1), 
-									  (float)(sin(shoot[i].rotation*DEG2RAD)*METEORS_SPEED*-1) 
+									smallMeteor[smallMeteorsCount].speed = {
+									  (float)(cos(shoot[i].rotation*DEG2RAD)*METEORS_SPEED*-1),
+									  (float)(sin(shoot[i].rotation*DEG2RAD)*METEORS_SPEED*-1)
 									};
 
 								}
 								else {
 
-									smallMeteor[smallMeteorsCount].position = { 
-										mediumMeteor[b].position.x, 
-										mediumMeteor[b].position.y 
+									smallMeteor[smallMeteorsCount].position = {
+										mediumMeteor[b].position.x,
+										mediumMeteor[b].position.y
 									};
 
-									smallMeteor[smallMeteorsCount].speed = { 
-									  (float)(cos(shoot[i].rotation*DEG2RAD)*METEORS_SPEED), 
-									  (float)(sin(shoot[i].rotation*DEG2RAD)*METEORS_SPEED) 
+									smallMeteor[smallMeteorsCount].speed = {
+									  (float)(cos(shoot[i].rotation*DEG2RAD)*METEORS_SPEED),
+									  (float)(sin(shoot[i].rotation*DEG2RAD)*METEORS_SPEED)
 									};
 
 								}
@@ -395,14 +386,14 @@ namespace asteroid {
 						}
 					}
 
-					for (int c = 0; c < MAX_SMALL_METEORS; c++){
+					for (int c = 0; c < MAX_SMALL_METEORS; c++) {
 
-						if (smallMeteor[c].active && 
+						if (smallMeteor[c].active &&
 							CheckCollisionCircles(
-								shoot[i].position, 
-								shoot[i].radius, 
-							    smallMeteor[c].position, 
-								smallMeteor[c].radius)){
+								shoot[i].position,
+								shoot[i].radius,
+								smallMeteor[c].position,
+								smallMeteor[c].radius)) {
 
 							shoot[i].active = false;
 							shoot[i].lifeSpawn = 0;
@@ -419,49 +410,75 @@ namespace asteroid {
 			}
 		}
 
-
-		void draw() {
-			for (int i = 0; i < MAX_BIG_METEORS; i++){
+		static void drawMeteor() {
+			for (int i = 0; i < MAX_BIG_METEORS; i++) {
 
 				if (bigMeteor[i].active) {
 					DrawTexturePro(
 						bigMeteorTex,
-						bigMeteor[i].sourceRec, 
-					    bigMeteor[i].destRec, 
-						bigMeteor[i].origin, 
+						bigMeteor[i].sourceRec,
+						bigMeteor[i].destRec,
+						bigMeteor[i].origin,
 						bigMeteor[i].rotation,
 						WHITE);
 				}
 
 			}
 
-			for (int i = 0; i < MAX_MEDIUM_METEORS; i++){
+			for (int i = 0; i < MAX_MEDIUM_METEORS; i++) {
 
 				if (mediumMeteor[i].active) {
 					DrawTexturePro(
 						mediumMeteorTex,
 						mediumMeteor[i].sourceRec,
-					    mediumMeteor[i].destRec, 
-						mediumMeteor[i].origin, 
-						mediumMeteor[i].rotation, 
+						mediumMeteor[i].destRec,
+						mediumMeteor[i].origin,
+						mediumMeteor[i].rotation,
 						WHITE);
 				}
 
 			}
 
-			for (int i = 0; i < MAX_SMALL_METEORS; i++){
+			for (int i = 0; i < MAX_SMALL_METEORS; i++) {
 
 				if (smallMeteor[i].active) {
 					DrawTexturePro(
 						smallMeteorTex,
-						smallMeteor[i].sourceRec, 
-					    smallMeteor[i].destRec, 
-						smallMeteor[i].origin, 
-						smallMeteor[i].rotation, 
+						smallMeteor[i].sourceRec,
+						smallMeteor[i].destRec,
+						smallMeteor[i].origin,
+						smallMeteor[i].rotation,
 						WHITE);
 				}
 
 			}
+		}
+
+		void init() {
+
+			safeZone = 250;
+			correctRange = false;
+			victory = false;
+			pause = false;
+			destroyedMeteorsCount = 0;
+
+			bigMeteorTex = LoadTexture("res/Textures/BIG_METEOR.png");
+			mediumMeteorTex = LoadTexture("res/Textures/MEDIUM_METEOR.png");
+			smallMeteorTex = LoadTexture("res/Textures/SMALL_METEOR.png");
+
+			initMeteor();
+			
+			midMeteorsCount = 0;
+			smallMeteorsCount = 0;
+		}
+
+		void update() {	
+			updateMeteor();
+		}
+
+
+		void draw() {
+			drawMeteor();
 		}
 
 		void deInit() {
@@ -469,5 +486,7 @@ namespace asteroid {
 				UnloadTexture(mediumMeteorTex);
 				UnloadTexture(smallMeteorTex);
 		}
+
+		
 	}
 }
