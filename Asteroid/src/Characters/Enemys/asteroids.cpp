@@ -29,13 +29,29 @@ namespace asteroid {
 		static int smallMeteorsCount;
 		int destroyedMeteorsCount;
 
-		static int posx,posx1,posx2, posy,posy1,posy2;
+		Vector2 range1, range2;
+		static int posx, posy;
 		static int velx, vely;
 		
 		static bool correctRange;
 		static int safeZone;
 		static bool victory;
 		static bool pause;
+
+		//Returns a value random between two diferents range for example [1,10] [45,100]
+		static float GetRandomValueInRange(Vector2 range1, Vector2 range2) {
+			int result1,result2;
+
+			result1 = GetRandomValue(range1.x, range1.y);
+			result2 = GetRandomValue(range2.x, range2.y);
+
+			if (GetRandomValue(0, 1)) {
+				return result1;
+			}
+			else {
+				return result2;
+			}
+		}
 
 		static void initMeteor() {
 			//Textures
@@ -46,25 +62,19 @@ namespace asteroid {
 			//Big Meteors
 			for (int i = 0; i < MAX_BIG_METEORS; i++) {
 
-				posx1 = GetRandomValue(0, (GetScreenWidth()/2)-safeZone);
-				posx2 = GetRandomValue((GetScreenWidth() / 2) + safeZone, GetScreenWidth());
-				
-				if (GetRandomValue(0, 1)) {
-					posx = posx1;
-				}
-				else {
-					posx = posx2;
-				}
+				//Start Getting Random Values to spawn
+				//X
+				range1 = { (float)0, (float)((GetScreenWidth() / 2) - safeZone) };
+				range2 = { (float)((GetScreenWidth() / 2) + safeZone),(float)GetScreenWidth() };
 
-				posy1 = GetRandomValue(0, (GetScreenHeight() / 2) - safeZone);
-				posy2 = GetRandomValue((GetScreenHeight() / 2) + safeZone, GetScreenHeight());
+				posx = GetRandomValueInRange(range1, range2);
 
-				if (GetRandomValue(0, 1)) {
-					posy = posy1;
-				}
-				else {
-					posy = posy2;
-				}
+				//Y
+				range1 = { (float)0, (float)((GetScreenHeight() / 2 )-safeZone)};
+				range2 = { (float)((GetScreenHeight() / 2) + safeZone), (float)GetScreenHeight() };
+
+				posy = GetRandomValueInRange(range1, range2);
+				//End Spawn Values
 
 				bigMeteor[i].position = { (float)posx,(float)posy };
 
