@@ -21,15 +21,15 @@ namespace asteroid {
 		Meteor mediumMeteor[MAX_MEDIUM_METEORS];
 		Meteor smallMeteor[MAX_SMALL_METEORS];
 
-		Texture bigMeteorTex;
-		Texture mediumMeteorTex;
-		Texture smallMeteorTex;
+		static Texture bigMeteorTex;
+		static Texture mediumMeteorTex;
+		static Texture smallMeteorTex;
 
 		static int midMeteorsCount;
 		static int smallMeteorsCount;
 		int destroyedMeteorsCount;
 
-		static int posx, posy;
+		static int posx,posx1,posx2, posy,posy1,posy2;
 		static int velx, vely;
 		
 		static bool correctRange;
@@ -38,38 +38,32 @@ namespace asteroid {
 		static bool pause;
 
 		static void initMeteor() {
+			//Textures
+			bigMeteorTex = LoadTexture("res/Textures/BIG_METEOR.png");
+			mediumMeteorTex = LoadTexture("res/Textures/MEDIUM_METEOR.png");
+			smallMeteorTex = LoadTexture("res/Textures/SMALL_METEOR.png");
 
 			//Big Meteors
 			for (int i = 0; i < MAX_BIG_METEORS; i++) {
 
-				posx = GetRandomValue(0, GetScreenWidth());
-
-				while (!correctRange) {
-
-					if (posx > GetScreenWidth() / 2 - safeZone &&
-						posx < GetScreenWidth() / 2 + safeZone) {
-
-						posx = GetRandomValue(0, GetScreenWidth());
-
-					}
-
-					else correctRange = true;
+				posx1 = GetRandomValue(0, (GetScreenWidth()/2)-safeZone);
+				posx2 = GetRandomValue((GetScreenWidth() / 2) + safeZone, GetScreenWidth());
+				
+				if (GetRandomValue(0, 1)) {
+					posx = posx1;
+				}
+				else {
+					posx = posx2;
 				}
 
-				correctRange = false;
+				posy1 = GetRandomValue(0, (GetScreenHeight() / 2) - safeZone);
+				posy2 = GetRandomValue((GetScreenHeight() / 2) + safeZone, GetScreenHeight());
 
-				posy = GetRandomValue(0, GetScreenHeight());
-
-				while (!correctRange) {
-
-					if (posy > GetScreenHeight() / 2 - safeZone &&
-						posy < GetScreenHeight() / 2 + safeZone) {
-
-						posy = GetRandomValue(0, GetScreenHeight());
-
-					}
-
-					else correctRange = true;
+				if (GetRandomValue(0, 1)) {
+					posy = posy1;
+				}
+				else {
+					posy = posy2;
 				}
 
 				bigMeteor[i].position = { (float)posx,(float)posy };
@@ -461,10 +455,6 @@ namespace asteroid {
 			victory = false;
 			pause = false;
 			destroyedMeteorsCount = 0;
-
-			bigMeteorTex = LoadTexture("res/Textures/BIG_METEOR.png");
-			mediumMeteorTex = LoadTexture("res/Textures/MEDIUM_METEOR.png");
-			smallMeteorTex = LoadTexture("res/Textures/SMALL_METEOR.png");
 
 			initMeteor();
 			
