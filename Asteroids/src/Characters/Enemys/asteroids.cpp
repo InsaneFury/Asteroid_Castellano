@@ -21,6 +21,10 @@ namespace asteroid {
 		Meteor mediumMeteor[MAX_MEDIUM_METEORS];
 		Meteor smallMeteor[MAX_SMALL_METEORS];
 
+		Texture bigMeteorTex;
+		Texture mediumMeteorTex;
+		Texture smallMeteorTex;
+
 		static int midMeteorsCount;
 		static int smallMeteorsCount;
 		int destroyedMeteorsCount;
@@ -39,14 +43,16 @@ namespace asteroid {
 			pause = false;
 			destroyedMeteorsCount = 0;
 
-			for (int i = 0; i < MAX_BIG_METEORS; i++)
-			{
+			bigMeteorTex = LoadTexture("res/Textures/BIG_METEOR.png");
+
+
+			for (int i = 0; i < MAX_BIG_METEORS; i++){
+
 				bigMeteor[i].texture = LoadTexture("res/Textures/BIG_METEOR.png");
 
 				posx = GetRandomValue(0, GetScreenWidth());
 
-				while (!correctRange)
-				{
+				while (!correctRange){
 					if (posx > GetScreenWidth() / 2 - 150 && posx < GetScreenWidth() / 2 + 150) {
 						posx = GetRandomValue(0, GetScreenWidth());
 					}
@@ -57,8 +63,7 @@ namespace asteroid {
 
 				posy = GetRandomValue(0, GetScreenHeight());
 
-				while (!correctRange)
-				{
+				while (!correctRange){
 					if (posy > GetScreenHeight() / 2 - 150 && posy < GetScreenHeight() / 2 + 150) {
 						posy = GetRandomValue(0, GetScreenHeight());
 					}
@@ -71,13 +76,13 @@ namespace asteroid {
 				velx = GetRandomValue(-METEORS_SPEED, METEORS_SPEED);
 				vely = GetRandomValue(-METEORS_SPEED, METEORS_SPEED);
 
-				while (!correctRange)
-				{
-					if (velx == 0 && vely == 0)
-					{
+				while (!correctRange){
+
+					if (velx == 0 && vely == 0){
 						velx = GetRandomValue(-METEORS_SPEED, METEORS_SPEED);
 						vely = GetRandomValue(-METEORS_SPEED, METEORS_SPEED);
 					}
+
 					else correctRange = true;
 				}
 
@@ -99,8 +104,8 @@ namespace asteroid {
 					                    (float)bigMeteor[i].texture.height / 2 };
 			}
 
-			for (int i = 0; i < MAX_MEDIUM_METEORS; i++)
-			{
+			for (int i = 0; i < MAX_MEDIUM_METEORS; i++){
+
 				mediumMeteor[i].texture = LoadTexture("res/Textures/MEDIUM_METEOR.png");
 				mediumMeteor[i].position = { -100, -100 };
 				mediumMeteor[i].speed = { 0, 0 };
@@ -121,8 +126,8 @@ namespace asteroid {
 					                       (float)mediumMeteor[i].texture.height / 2 };
 			}
 
-			for (int i = 0; i < MAX_SMALL_METEORS; i++)
-			{
+			for (int i = 0; i < MAX_SMALL_METEORS; i++){
+
 				smallMeteor[i].texture = LoadTexture("res/Textures/SMALL_METEOR.png");
 				smallMeteor[i].position = { -100, -100 };
 				smallMeteor[i].speed = { 0, 0 };

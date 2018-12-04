@@ -41,7 +41,7 @@ namespace asteroid {
 			if (!isGameOver){
 
 				mousePoint = GetMousePosition();
-				if (pause == false) {
+				if (pause == false && tutorial == false) {
 					buttons::isMouseOverButton(pause_btn);
 					if (CheckCollisionPointRec(mousePoint, pause_btn.size))
 					{
@@ -50,7 +50,7 @@ namespace asteroid {
 						}
 					}
 				}
-				if (IsKeyPressed(KEY_SPACE)) {
+				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 					tutorial = false;
 				}
 		
