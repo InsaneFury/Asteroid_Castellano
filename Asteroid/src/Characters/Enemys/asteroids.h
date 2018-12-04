@@ -6,7 +6,6 @@
 namespace asteroid {
 	namespace asteroids {
 		struct Meteor {
-			Texture2D texture;
 			Vector2 position;
 			Vector2 speed;
 			float radius;
