@@ -159,17 +159,17 @@ namespace asteroid {
 					bigMeteor[i].position.y += bigMeteor[i].speed.y * GetFrameTime();
 
 					// Collision logic: meteor vs wall
-					if (bigMeteor[i].position.x > GetScreenWidth() + bigMeteor[i].texture.height) {
-						bigMeteor[i].position.x = -(bigMeteor[i].texture.height);
+					if (bigMeteor[i].position.x > GetScreenWidth() + bigMeteor[i].radius) {
+						bigMeteor[i].position.x = -(bigMeteor[i].radius);
 					}
-					else if (bigMeteor[i].position.x < 0 - bigMeteor[i].texture.height) {
-						bigMeteor[i].position.x = GetScreenWidth() + bigMeteor[i].texture.height;
+					else if (bigMeteor[i].position.x < 0 - bigMeteor[i].radius) {
+						bigMeteor[i].position.x = GetScreenWidth() + bigMeteor[i].radius;
 					}
 					if (bigMeteor[i].position.y > GetScreenHeight() + bigMeteor[i].radius) {
 						bigMeteor[i].position.y = -(bigMeteor[i].radius);
 					}
-					else if (bigMeteor[i].position.y < 0 - bigMeteor[i].texture.height) {
-						bigMeteor[i].position.y = GetScreenHeight() + bigMeteor[i].texture.height;
+					else if (bigMeteor[i].position.y < 0 - bigMeteor[i].radius) {
+						bigMeteor[i].position.y = GetScreenHeight() + bigMeteor[i].radius;
 					}
 				}
 
@@ -188,17 +188,17 @@ namespace asteroid {
 					mediumMeteor[i].position.y += mediumMeteor[i].speed.y * GetFrameTime();
 
 					// Collision logic: meteor vs wall
-					if (mediumMeteor[i].position.x > GetScreenWidth() + mediumMeteor[i].texture.height) {
-						mediumMeteor[i].position.x = -(mediumMeteor[i].texture.height);
+					if (mediumMeteor[i].position.x > GetScreenWidth() + mediumMeteor[i].radius) {
+						mediumMeteor[i].position.x = -(mediumMeteor[i].radius);
 					}
-					else if (mediumMeteor[i].position.x < 0 - mediumMeteor[i].texture.height) {
-						mediumMeteor[i].position.x = GetScreenWidth() + mediumMeteor[i].texture.height;
+					else if (mediumMeteor[i].position.x < 0 - mediumMeteor[i].radius) {
+						mediumMeteor[i].position.x = GetScreenWidth() + mediumMeteor[i].radius;
 					}
 					if (mediumMeteor[i].position.y > GetScreenHeight() + mediumMeteor[i].radius) {
-						mediumMeteor[i].position.y = -(mediumMeteor[i].texture.height);
+						mediumMeteor[i].position.y = -(mediumMeteor[i].radius);
 					}
-					else if (mediumMeteor[i].position.y < 0 - mediumMeteor[i].texture.height) {
-						mediumMeteor[i].position.y = GetScreenHeight() + mediumMeteor[i].texture.height;
+					else if (mediumMeteor[i].position.y < 0 - mediumMeteor[i].radius) {
+						mediumMeteor[i].position.y = GetScreenHeight() + mediumMeteor[i].radius;
 					}
 				}
 
@@ -217,17 +217,17 @@ namespace asteroid {
 					smallMeteor[i].position.y += smallMeteor[i].speed.y * GetFrameTime();
 
 					// Collision logic: meteor vs wall
-					if (smallMeteor[i].position.x > GetScreenWidth() + smallMeteor[i].texture.height) {
-						smallMeteor[i].position.x = -(smallMeteor[i].texture.height);
+					if (smallMeteor[i].position.x > GetScreenWidth() + smallMeteor[i].radius) {
+						smallMeteor[i].position.x = -(smallMeteor[i].radius);
 					}
-					else if (smallMeteor[i].position.x < 0 - smallMeteor[i].texture.height) {
-						smallMeteor[i].position.x = GetScreenWidth() + smallMeteor[i].texture.height;
+					else if (smallMeteor[i].position.x < 0 - smallMeteor[i].radius) {
+						smallMeteor[i].position.x = GetScreenWidth() + smallMeteor[i].radius;
 					}
-					if (smallMeteor[i].position.y > GetScreenHeight() + smallMeteor[i].texture.height) {
-						smallMeteor[i].position.y = -(smallMeteor[i].texture.height);
+					if (smallMeteor[i].position.y > GetScreenHeight() + smallMeteor[i].radius) {
+						smallMeteor[i].position.y = -(smallMeteor[i].radius);
 					}
 					else if (smallMeteor[i].position.y < 0 - smallMeteor[i].texture.height) {
-						smallMeteor[i].position.y = GetScreenHeight() + smallMeteor[i].texture.height;
+						smallMeteor[i].position.y = GetScreenHeight() + smallMeteor[i].radius;
 					}
 				}
 
