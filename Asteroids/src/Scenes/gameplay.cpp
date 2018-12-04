@@ -59,7 +59,7 @@ namespace asteroid {
 					players::update();
 					asteroids::update();
 				}
-				else {
+				else if (tutorial == false) {
 					pause_menu::update(isGameOver);
 				}
 				if (victory::isVictory()) {
