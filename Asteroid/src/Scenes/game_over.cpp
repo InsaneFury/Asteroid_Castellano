@@ -10,14 +10,15 @@ namespace asteroid {
 		using namespace gameplay;
 
 		//Images
-		Texture2D gameover_bg;
-		Texture2D gameover_title;
+		static Texture2D gameover_bg;
+		static Texture2D gameover_title;
 
-		Vector2 title_position;
+		static Vector2 title_position;
+		static Vector2 mouse_point;
 
-		buttons::BTNTEX retry;
-		buttons::BTNTEX menu;
-		buttons::BTNTEX quit;
+		static buttons::BTNTEX retry;
+		static buttons::BTNTEX menu;
+		static buttons::BTNTEX quit;
 
 		void init() {
 			gameover_bg = LoadTexture("res/Textures/GAMEOVER_BG.png");
@@ -30,21 +31,44 @@ namespace asteroid {
 			quit.btn_texture = LoadTexture("res/Textures/QUIT_BTN.png");
 			quit.btnOnHover_texture = LoadTexture("res/Textures/QUITONHOVER_BTN.png");
 
-			title_position = { (float)(screenWidth / 2 - gameover_title.width / 2) + 10, (float)(screenHeight / 2 - gameover_title.height / 2) - 180 };
+			title_position = { 
+				(float)(screenWidth / 2 - gameover_title.width / 2) + 10,
+				(float)(screenHeight / 2 - gameover_title.height / 2) - 180 
+			};
 
-			buttons::createButton(retry, retry.btn_texture.height, retry.btn_texture.width, (float)(GetScreenWidth() / 2 - retry.btn_texture.width / 2), (float)(GetScreenHeight() - 400), WHITE);
-			buttons::createButton(menu, menu.btn_texture.height, menu.btn_texture.width, (float)(GetScreenWidth() / 2 - menu.btn_texture.width / 2), (float)(GetScreenHeight() - 330), WHITE);
-			buttons::createButton(quit, quit.btn_texture.height, quit.btn_texture.width, (float)(GetScreenWidth() / 2 - quit.btn_texture.width / 2), (float)(GetScreenHeight() - 260), WHITE);
+			buttons::createButton(
+				retry, 
+				retry.btn_texture.height, 
+				retry.btn_texture.width, 
+				(float)(GetScreenWidth() / 2 - retry.btn_texture.width / 2),
+				(float)(GetScreenHeight() - 400), 
+				WHITE);
+
+			buttons::createButton(
+				menu, 
+				menu.btn_texture.height, 
+				menu.btn_texture.width, 
+				(float)(GetScreenWidth() / 2 - menu.btn_texture.width / 2),
+				(float)(GetScreenHeight() - 330), 
+				WHITE);
+
+			buttons::createButton(
+				quit, 
+				quit.btn_texture.height,
+				quit.btn_texture.width, 
+				(float)(GetScreenWidth() / 2 - quit.btn_texture.width / 2),
+				(float)(GetScreenHeight() - 260), 
+				WHITE);
 
 		}
 
 		void update(bool &isGameOver) {
 
 			//mouse
-			Vector2 mousePoint = GetMousePosition();
+			mouse_point = GetMousePosition();
 
 			buttons::isMouseOverButton(retry);
-			if (CheckCollisionPointRec(mousePoint, retry.size))
+			if (CheckCollisionPointRec(mouse_point, retry.size))
 			{
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 					actualScene = Game;
@@ -54,7 +78,7 @@ namespace asteroid {
 				}
 			}
 			buttons::isMouseOverButton(menu);
-			if (CheckCollisionPointRec(mousePoint, menu.size))
+			if (CheckCollisionPointRec(mouse_point, menu.size))
 			{
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 					gameplay::init();
@@ -64,7 +88,7 @@ namespace asteroid {
 				}
 			}
 			buttons::isMouseOverButton(quit);
-			if (CheckCollisionPointRec(mousePoint, quit.size))
+			if (CheckCollisionPointRec(mouse_point, quit.size))
 			{
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 					isGameOver = true;

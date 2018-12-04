@@ -5,14 +5,14 @@
 namespace asteroid {
 	namespace animations {
 
-		Texture2D gameplay_bg;
-		Texture2D stars_1;
-		Texture2D stars_2;
-		Color stars_1_color;
-		Color stars_2_color;
+		static Texture2D gameplay_bg;
+		static Texture2D stars_1;
+		static Texture2D stars_2;
+		static Color stars_1_color;
+		static Color stars_2_color;
 		static float timer;
 		static float delayTime = 0.01f;
-		bool exchange_texture;
+		static bool exchange_texture;
 
 		void init() {
 			gameplay_bg = LoadTexture("res/Textures/GAMEPLAY_BG.png");

@@ -14,17 +14,23 @@ namespace asteroid {
 		bool pause = false;
 		bool tutorial = true;
 
-		Texture2D gameplay_vintage;
-		Texture2D gameplay_tutorial;
+		static Texture2D gameplay_vintage;
+		static Texture2D gameplay_tutorial;
 
-		buttons::BTNTEX pause_btn;
+		static buttons::BTNTEX pause_btn;
 
-		Vector2 mousePoint;
+		static Vector2 mouse_point;
 
 		void init() {
 			pause_btn.btn_texture = LoadTexture("res/Textures/PAUSE_BTN.png");
 			pause_btn.btnOnHover_texture = LoadTexture("res/Textures/PAUSEONHOVER_BTN.png");
-			buttons::createButton(pause_btn, pause_btn.btn_texture.height, pause_btn.btn_texture.width, (float)(GetScreenWidth() - pause_btn.btn_texture.width - pause_btn.btn_texture.width/2), (float)(pause_btn.btn_texture.height/2), WHITE);
+			buttons::createButton(
+				pause_btn, 
+				pause_btn.btn_texture.height, 
+				pause_btn.btn_texture.width, 
+				(float)(GetScreenWidth() - pause_btn.btn_texture.width - pause_btn.btn_texture.width/2), 
+				(float)(pause_btn.btn_texture.height/2), 
+				WHITE);
 
 			gameplay_vintage = LoadTexture("res/Textures/VINTAGE.png");
 			gameplay_tutorial = LoadTexture("res/Textures/tutorial.png");
@@ -40,10 +46,10 @@ namespace asteroid {
 
 			if (!isGameOver){
 
-				mousePoint = GetMousePosition();
+				mouse_point = GetMousePosition();
 				if (pause == false && tutorial == false) {
 					buttons::isMouseOverButton(pause_btn);
-					if (CheckCollisionPointRec(mousePoint, pause_btn.size))
+					if (CheckCollisionPointRec(mouse_point, pause_btn.size))
 					{
 						if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 							pause = !pause;
@@ -76,7 +82,14 @@ namespace asteroid {
 				animations::draw();
 				players::draw();
 				asteroids::draw();
-				DrawText(FormatText("SCORE: %02i", asteroids::destroyedMeteorsCount), GetScreenWidth() / 2 - MeasureText("SCORE: 00", 40) / 2, 50, 40, WHITE);
+
+				DrawText(
+					FormatText("SCORE: %02i", asteroids::destroyedMeteorsCount),
+					GetScreenWidth() / 2 - MeasureText("SCORE: 00", 40) / 2,
+					50,
+					40,
+					WHITE);
+
 				if (pause == false) {
 					buttons::draw(pause_btn);
 				}

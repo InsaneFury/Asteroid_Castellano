@@ -4,7 +4,17 @@ namespace asteroid {
 	namespace buttons {
 
 		//use for create a button
-		void createButton(BTN &button, int height, int width,int posX,int posY, int strokeThick, int fontSize, Color btnColor,Color strokeColor,Color textColor) {
+		void createButton(
+			BTN &button, 
+			int height, 
+			int width,
+			int posX,
+			int posY, 
+			int strokeThick,
+			int fontSize, 
+			Color btnColor,
+			Color strokeColor,
+			Color textColor) {
 
 			button.size.height = (float)height;
 			button.size.width = (float)width;
@@ -18,7 +28,14 @@ namespace asteroid {
 		}
 
 		//use for create a Texture button
-		void createButton(BTNTEX &button, int height, int width, int posX, int posY, Color btnColor) {
+		void createButton(
+			BTNTEX &button, 
+			int height,
+			int width, 
+			int posX, 
+			int posY, 
+			Color btnColor) {
+
 			button.size.height = (float)height;
 			button.size.width = (float)width;
 			button.size.x = posX;
@@ -29,9 +46,9 @@ namespace asteroid {
 
 		//use for alpha FX when mouse point is over the button
 		void isMouseOverButton(BTN &button) {
-			Vector2 mousePoint = GetMousePosition();
+			Vector2 mouse_point = GetMousePosition();
 
-			if (CheckCollisionPointRec(mousePoint, button.size))
+			if (CheckCollisionPointRec(mouse_point, button.size))
 			{
 				button.color.a = 120;
 			}
@@ -42,9 +59,9 @@ namespace asteroid {
 
 		//use for change btn texture when mouse point is over the button
 		void isMouseOverButton(BTNTEX &button) {
-			Vector2 mousePoint = GetMousePosition();
+			Vector2 mouse_point = GetMousePosition();
 
-			if (CheckCollisionPointRec(mousePoint, button.size))
+			if (CheckCollisionPointRec(mouse_point, button.size))
 			{
 				button.isHover = true;
 			}
@@ -56,18 +73,37 @@ namespace asteroid {
 		//use for draw a button
 		void draw(BTN button, const char *text) {
 			DrawRectangleRec(button.size, button.color);
-			DrawText(text, button.size.x - (MeasureText(text, button.fontsize) / 2) + button.size.width/2, button.size.y  - (button.fontsize / 2) + button.size.height/2, button.fontsize, button.textColor);
-			DrawRectangleLinesEx(button.size, button.strokeThick, button.strokeColor);
+
+			DrawText(
+				text, 
+				button.size.x - (MeasureText(text, button.fontsize) / 2) + button.size.width/2,
+				button.size.y  - (button.fontsize / 2) + button.size.height/2, 
+				button.fontsize,
+				button.textColor);
+
+			DrawRectangleLinesEx(
+				button.size, 
+				button.strokeThick, 
+				button.strokeColor);
 		}
 
 		//use for draw a button
 		void draw(BTNTEX button) {
 			if (!button.isHover)
 			{
-				DrawTexture(button.btnOnHover_texture, button.size.x, button.size.y, button.color);
+				DrawTexture(
+					button.btnOnHover_texture, 
+					button.size.x, 
+					button.size.y, 
+					button.color);
 			}
 			else {
-				DrawTexture(button.btn_texture, button.size.x, button.size.y, button.color);
+
+				DrawTexture(
+					button.btn_texture, 
+					button.size.x, 
+					button.size.y, 
+					button.color);
 			}
 		}
 	}

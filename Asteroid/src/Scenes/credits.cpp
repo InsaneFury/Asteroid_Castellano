@@ -9,16 +9,16 @@ namespace asteroid {
 		using namespace game;
 
 		//Images
-		Texture2D credits_bg;
-		Texture2D credits_astronaut;
-		Texture2D credits_title;
-		Texture2D credits_text;
+		static Texture2D credits_bg;
+		static Texture2D credits_astronaut;
+		static Texture2D credits_title;
+		static Texture2D credits_text;
 
-		Vector2 astronaut_position;
-		Vector2 title_position;
-		Vector2 text_position;
+		static  Vector2 astronaut_position;
+		static  Vector2 title_position;
+		static  Vector2 text_position;
 
-		buttons::BTNTEX back;
+		static  buttons::BTNTEX back;
 
 		//buttons::BTN back;
 
@@ -28,22 +28,39 @@ namespace asteroid {
 			credits_title = LoadTexture("res/Textures/TITLE_CREDITS.png");
 			credits_text = LoadTexture("res/Textures/TEXT_CREDITS.png");
 
-			astronaut_position = { (float)(0 + credits_astronaut.width / 2) + 250, (float)(0 + credits_astronaut.height / 2) };
-			title_position = { (float)(screenWidth / 2 - credits_title.width / 2), (float)(screenHeight / 2 - credits_title.height / 2) - 150 };
-			text_position = { (float)(screenWidth / 2 - credits_text.width / 2), (float)(screenHeight - credits_text.height / 2) - 275 };
+			astronaut_position = { 
+				(float)(0 + credits_astronaut.width / 2) + 250,
+				(float)(0 + credits_astronaut.height / 2) 
+			};
+
+			title_position = { 
+				(float)(screenWidth / 2 - credits_title.width / 2), 
+				(float)(screenHeight / 2 - credits_title.height / 2) - 150 
+			};
+
+			text_position = { 
+				(float)(screenWidth / 2 - credits_text.width / 2), 
+				(float)(screenHeight - credits_text.height / 2) - 275 
+			};
 
 			back.btn_texture = LoadTexture("res/Textures/BACK_BTN.png");
 			back.btnOnHover_texture = LoadTexture("res/Textures/BACKONHOVER_BTN.png");
 
-			buttons::createButton(back, back.btn_texture.height, back.btn_texture.width, (float)(0 + back.btn_texture.width/4), (float)GetScreenHeight() - back.btn_texture.height - 20,WHITE);
+			buttons::createButton(
+				back, 
+				back.btn_texture.height,
+				back.btn_texture.width, 
+				(float)(0 + back.btn_texture.width/4), 
+				(float)GetScreenHeight() - back.btn_texture.height - 20,
+				WHITE);
 
 		}
 
 		void update() {
-			Vector2 mousePoint = GetMousePosition();
+			Vector2 mouse_point = GetMousePosition();
 			buttons::isMouseOverButton(back);
 
-			if (CheckCollisionPointRec(mousePoint, back.size))
+			if (CheckCollisionPointRec(mouse_point, back.size))
 			{
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 					menu::init();

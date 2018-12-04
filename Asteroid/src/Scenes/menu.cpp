@@ -8,13 +8,14 @@ namespace asteroid {
 		using namespace game;
 
 		//Images
-		Texture2D menu_bg;
+		static Texture2D menu_bg;
 
-		Vector2 title_position;
+		static Vector2 title_position;
+		static Vector2 mouse_point;
 
-		buttons::BTNTEX play;
-		buttons::BTNTEX credits;
-		buttons::BTNTEX quit;
+		static buttons::BTNTEX play;
+		static buttons::BTNTEX credits;
+		static buttons::BTNTEX quit;
 
 		void init() {
 			menu_bg = LoadTexture("res/Textures/NEW_BG_MENU.png");
@@ -26,23 +27,43 @@ namespace asteroid {
 			credits.btnOnHover_texture = LoadTexture("res/Textures/CREDITSONHOVER_BTN.png");
 			quit.btnOnHover_texture = LoadTexture("res/Textures/QUITONHOVER_BTN.png");
 
-			buttons::createButton(play, play.btn_texture.height, play.btn_texture.width, (float)(GetScreenWidth() / 2 - play.btn_texture.width / 2), (float)(GetScreenHeight() - 400), WHITE);
-			buttons::createButton(credits, credits.btn_texture.height, credits.btn_texture.width, (float)(GetScreenWidth() / 2 - credits.btn_texture.width / 2), (float)(GetScreenHeight() - 330), WHITE);
-			buttons::createButton(quit, quit.btn_texture.height, quit.btn_texture.width, (float)(GetScreenWidth() / 2 - quit.btn_texture.width / 2), (float)(GetScreenHeight() - 260), WHITE);
+			buttons::createButton(
+				play,
+				play.btn_texture.height, 
+				play.btn_texture.width, 
+				(float)(GetScreenWidth() / 2 - play.btn_texture.width / 2), 
+				(float)(GetScreenHeight() - 400), 
+				WHITE);
+
+			buttons::createButton(
+				credits, 
+				credits.btn_texture.height, 
+				credits.btn_texture.width, 
+				(float)(GetScreenWidth() / 2 - credits.btn_texture.width / 2), 
+				(float)(GetScreenHeight() - 330), 
+				WHITE);
+
+			buttons::createButton(
+				quit, 
+				quit.btn_texture.height, 
+				quit.btn_texture.width, 
+				(float)(GetScreenWidth() / 2 - quit.btn_texture.width / 2), 
+				(float)(GetScreenHeight() - 260), 
+				WHITE);
 		}
 
 		void update(bool &endGame) {
-			Vector2 mousePoint = GetMousePosition();
+			mouse_point = GetMousePosition();
 
 			buttons::isMouseOverButton(play);
-			if (CheckCollisionPointRec(mousePoint, play.size))
+			if (CheckCollisionPointRec(mouse_point, play.size))
 			{
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 					actualScene = Game;
 				}
 			}
 			buttons::isMouseOverButton(credits);
-			if (CheckCollisionPointRec(mousePoint, credits.size))
+			if (CheckCollisionPointRec(mouse_point, credits.size))
 			{
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 					actualScene = Credits;
@@ -50,7 +71,7 @@ namespace asteroid {
 			}
 
 			buttons::isMouseOverButton(quit);
-			if (CheckCollisionPointRec(mousePoint, quit.size))
+			if (CheckCollisionPointRec(mouse_point, quit.size))
 			{
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 					endGame = true;

@@ -28,13 +28,26 @@ namespace asteroid {
 				shoot[i].lifeSpawn = 0;
 				shoot[i].color = WHITE;
 				// NOTE: Source rectangle (part of the texture to use for drawing)
-				shoot[i].sourceRec = { 0.0f, 0.0f, (float)shoot[i].texture.width, (float)shoot[i].texture.height };
+				shoot[i].sourceRec = { 
+					0.0f, 
+					0.0f, 
+					(float)shoot[i].texture.width, 
+					(float)shoot[i].texture.height 
+				};
 
 				// NOTE: Destination rectangle (screen rectangle where drawing part of texture)
-				shoot[i].destRec = { shoot[i].position.x, shoot[i].position.y, (float)shoot[i].texture.width, (float)shoot[i].texture.height };
+				shoot[i].destRec = { 
+					shoot[i].position.x, 
+					shoot[i].position.y, 
+					(float)shoot[i].texture.width, 
+					(float)shoot[i].texture.height 
+				};
 
 				// NOTE: Origin of the texture (rotation/scale point), it's relative to destination rectangle size
-				shoot[i].origin = { (float)shoot[i].texture.width / 2, (float)shoot[i].texture.height / 2 };
+				shoot[i].origin = { 
+					(float)shoot[i].texture.width / 2, 
+					(float)shoot[i].texture.height / 2
+				};
 			}
 		}
 
@@ -46,12 +59,26 @@ namespace asteroid {
 				if (timer > 0.2f) {
 					for (int i = 0; i < PLAYER_MAX_SHOOTS; i++) {
 						if (!shoot[i].active) {
-							shoot[i].position = { (float)(player.position.x + sin(player.rotation*DEG2RAD)*(player.texture.height)),(float)(player.position.y - cos(player.rotation*DEG2RAD)*(player.texture.height)) };
+
+							shoot[i].position = { 
+								(float)(player.position.x + sin(player.rotation*DEG2RAD)*(player.texture.height)),
+								(float)(player.position.y - cos(player.rotation*DEG2RAD)*(player.texture.height)) 
+							};
+
 							shoot[i].active = true;
-							shoot[i].destRec = { shoot[i].position.x, shoot[i].position.y, (float)shoot[i].texture.width, (float)shoot[i].texture.height };
+
+							shoot[i].destRec = { 
+								shoot[i].position.x, 
+								shoot[i].position.y, 
+								(float)shoot[i].texture.width, 
+								(float)shoot[i].texture.height 
+							};
+
 							shoot[i].speed.x = SHOOT_SPEED * sin(player.rotation*DEG2RAD)*PLAYER_SPEED;
 							shoot[i].speed.y = SHOOT_SPEED * cos(player.rotation*DEG2RAD)*PLAYER_SPEED;
+
 							shoot[i].rotation = player.rotation;
+
 							timer = 0.0f;
 							break;
 						}
@@ -70,7 +97,13 @@ namespace asteroid {
 					// Movement
 					shoot[i].position.x += shoot[i].speed.x * GetFrameTime();
 					shoot[i].position.y -= shoot[i].speed.y * GetFrameTime();
-					shoot[i].destRec = { shoot[i].position.x, shoot[i].position.y, (float)shoot[i].texture.width, (float)shoot[i].texture.height };
+
+					shoot[i].destRec = { 
+						shoot[i].position.x, 
+						shoot[i].position.y, 
+						(float)shoot[i].texture.width, 
+						(float)shoot[i].texture.height 
+					};
 
 					// Collision logic: shoot vs walls
 					if (shoot[i].position.x > GetScreenWidth() + shoot[i].radius){
@@ -105,7 +138,13 @@ namespace asteroid {
 		void draw() {
 			for (int i = 0; i < PLAYER_MAX_SHOOTS; i++) {
 				if (shoot[i].active) {
-					DrawTexturePro(shoot[i].texture, shoot[i].sourceRec, shoot[i].destRec, shoot[i].origin, shoot[i].rotation, shoot[i].color);
+					DrawTexturePro(
+						shoot[i].texture, 
+						shoot[i].sourceRec, 
+						shoot[i].destRec, 
+						shoot[i].origin, 
+						shoot[i].rotation, 
+						shoot[i].color);
 				}
 			}
 		}

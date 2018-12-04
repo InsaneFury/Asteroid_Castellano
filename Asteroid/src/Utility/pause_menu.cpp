@@ -11,17 +11,18 @@ namespace asteroid {
 		using namespace gameplay;
 
 		//Images
-		Texture2D pause_bg;
-		Texture2D pause_title;
+		static Texture2D pause_bg;
+		static Texture2D pause_title;
 
-		Vector2 title_position;
+		static Vector2 title_position;
+		static Vector2 mouse_point;
 
-		buttons::BTNTEX resume;
-		buttons::BTNTEX retry;
-		buttons::BTNTEX menu;
-		buttons::BTNTEX quit;
-		buttons::BTNTEX mute;
-		buttons::BTNTEX unmute;
+		static buttons::BTNTEX resume;
+		static buttons::BTNTEX retry;
+		static buttons::BTNTEX menu;
+		static buttons::BTNTEX quit;
+		static buttons::BTNTEX mute;
+		static buttons::BTNTEX unmute;
 
 		static bool isPlaying;
 
@@ -42,14 +43,58 @@ namespace asteroid {
 			unmute.btn_texture = LoadTexture("res/Textures/MUTEON_BTN.png");
 			unmute.btnOnHover_texture = LoadTexture("res/Textures/MUTEON_BTN.png");
 
-			title_position = { (float)(screenWidth / 2 - pause_title.width / 2) + 10, (float)(screenHeight / 2 - pause_title.height / 2) - 180 };
+			title_position = { 
+				(float)(screenWidth / 2 - pause_title.width / 2) + 10, 
+				(float)(screenHeight / 2 - pause_title.height / 2) - 180 
+			};
 
-			buttons::createButton(resume, resume.btn_texture.height, resume.btn_texture.width, (float)(GetScreenWidth() / 2 - resume.btn_texture.width / 2), (float)(GetScreenHeight() - 400), WHITE);
-			buttons::createButton(retry, retry.btn_texture.height, retry.btn_texture.width, (float)(GetScreenWidth() / 2 - retry.btn_texture.width / 2), (float)(GetScreenHeight() - 330), WHITE);
-			buttons::createButton(menu, menu.btn_texture.height, menu.btn_texture.width, (float)(GetScreenWidth() / 2 - menu.btn_texture.width / 2), (float)(GetScreenHeight() - 260), WHITE);
-			buttons::createButton(quit, quit.btn_texture.height, quit.btn_texture.width, (float)(GetScreenWidth() / 2 - quit.btn_texture.width / 2), (float)(GetScreenHeight() - 190), WHITE);
-			buttons::createButton(mute, mute.btn_texture.height, mute.btn_texture.width, (float)(GetScreenWidth() / 2 - mute.btn_texture.width / 2), (float)(GetScreenHeight() - 120), WHITE);
-			buttons::createButton(unmute, unmute.btn_texture.height, unmute.btn_texture.width, (float)(GetScreenWidth() / 2 - unmute.btn_texture.width / 2), (float)(GetScreenHeight() - 120), WHITE);
+			buttons::createButton(
+				resume,
+				resume.btn_texture.height, 
+				resume.btn_texture.width, 
+				(float)(GetScreenWidth() / 2 - resume.btn_texture.width / 2),
+				(float)(GetScreenHeight() - 400),
+				WHITE);
+
+			buttons::createButton(
+				retry, 
+				retry.btn_texture.height,
+				retry.btn_texture.width, 
+				(float)(GetScreenWidth() / 2 - retry.btn_texture.width / 2),
+				(float)(GetScreenHeight() - 330), 
+				WHITE);
+
+			buttons::createButton(
+				menu, 
+				menu.btn_texture.height,
+				menu.btn_texture.width, 
+				(float)(GetScreenWidth() / 2 - menu.btn_texture.width / 2),
+				(float)(GetScreenHeight() - 260),
+				WHITE);
+
+			buttons::createButton(
+				quit, 
+				quit.btn_texture.height, 
+				quit.btn_texture.width,
+				(float)(GetScreenWidth() / 2 - quit.btn_texture.width / 2), 
+				(float)(GetScreenHeight() - 190), 
+				WHITE);
+
+			buttons::createButton(
+				mute, 
+				mute.btn_texture.height,
+				mute.btn_texture.width, 
+				(float)(GetScreenWidth() / 2 - mute.btn_texture.width / 2), 
+				(float)(GetScreenHeight() - 120), 
+				WHITE);
+
+			buttons::createButton(
+				unmute,
+				unmute.btn_texture.height, 
+				unmute.btn_texture.width, 
+				(float)(GetScreenWidth() / 2 - unmute.btn_texture.width / 2),
+				(float)(GetScreenHeight() - 120), 
+				WHITE);
 
 			isPlaying = true;
 		}
@@ -57,17 +102,17 @@ namespace asteroid {
 		void update(bool &isGameOver) {
 
 			//mouse
-			Vector2 mousePoint = GetMousePosition();
+			mouse_point = GetMousePosition();
 			
 			buttons::isMouseOverButton(resume);
-			if (CheckCollisionPointRec(mousePoint, resume.size))
+			if (CheckCollisionPointRec(mouse_point, resume.size))
 			{
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 					pause = !pause;
 				}
 			}
 			buttons::isMouseOverButton(retry);
-			if (CheckCollisionPointRec(mousePoint, retry.size))
+			if (CheckCollisionPointRec(mouse_point, retry.size))
 			{
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 					actualScene = Game;
@@ -77,7 +122,7 @@ namespace asteroid {
 				}
 			}
 			buttons::isMouseOverButton(menu);
-			if (CheckCollisionPointRec(mousePoint, menu.size))
+			if (CheckCollisionPointRec(mouse_point, menu.size))
 			{
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 					gameplay::init();
@@ -88,14 +133,14 @@ namespace asteroid {
 				}
 			}
 			buttons::isMouseOverButton(quit);
-			if (CheckCollisionPointRec(mousePoint, quit.size))
+			if (CheckCollisionPointRec(mouse_point, quit.size))
 			{
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 					isGameOver = true;
 				}
 			}
 			buttons::isMouseOverButton(mute);
-			if (CheckCollisionPointRec(mousePoint, mute.size))
+			if (CheckCollisionPointRec(mouse_point, mute.size))
 			{
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 					if (isPlaying) {
