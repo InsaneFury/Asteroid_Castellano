@@ -57,6 +57,7 @@ namespace asteroid {
 		}
 
 		void update() {
+			game::updateMouse();
 			Vector2 mouse_point = GetMousePosition();
 			buttons::isMouseOverButton(back);
 
@@ -71,7 +72,7 @@ namespace asteroid {
 
 		void draw() {
 			ClearBackground(WHITE);
-
+			
 			//Draw UI
 			DrawTexture(credits_bg, 0, 0, WHITE);
 			DrawTextureEx(credits_astronaut, astronaut_position, 0, 1, WHITE);
@@ -80,6 +81,7 @@ namespace asteroid {
 
 			//Draw buttons
 			buttons::draw(back);
+			game::drawMouse();
 		}
 
 		void deInit() {

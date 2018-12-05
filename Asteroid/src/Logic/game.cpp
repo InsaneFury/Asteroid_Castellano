@@ -6,6 +6,7 @@
 #include "Scenes/credits.h"
 #include "Utility/post_processing.h"
 
+
 namespace asteroid {
 	namespace game {
 		static void init();
@@ -20,10 +21,18 @@ namespace asteroid {
 
 		Music bgMusic;
 
+		//Mouse
+		static Texture mouse;
+		static Vector2 mouse_pointer; 
+		static Rectangle sourceRec;  
+		static Rectangle destRec;  
+		static Vector2 origin;   
+		static float rotation;  
+
 		ActualScene actualScene = Menu;
 
 		static bool isGameOver = false;
-
+		
 		void runGame() {
 			init();
 
@@ -40,7 +49,10 @@ namespace asteroid {
 			//Initialization of all the game!
 			SetConfigFlags(FLAG_MSAA_4X_HINT);      // Enable Multi Sampling Anti Aliasing 4x (if available)
 			InitWindow(screenWidth, screenHeight, "Asteroid | by Ivan Castellano");
-			
+
+			HideCursor();
+			initMouse();
+
 			#ifdef AUDIO
 			#define AUDIO
 			InitAudioDevice();
@@ -65,6 +77,8 @@ namespace asteroid {
 		void update() {
 			// Update
 			//----------------------------------------------------------------------------------
+
+			
 			#ifdef AUDIO
 			#define AUDIO
 			UpdateMusicStream(bgMusic);
@@ -129,7 +143,54 @@ namespace asteroid {
 				gameplay::deInit();
 				credits::deInit();
 				menu::deInit();
+				deInitMouse();
 			CloseWindow();        // Close window and OpenGL context
+		}
+
+		void initMouse() {
+
+			mouse = LoadTexture("res/Textures/MOUSE.png");
+
+			mouse_pointer = GetMousePosition();
+
+			sourceRec = {
+				0.0f,
+				0.0f,
+				(float)(mouse.width),
+				(float)(mouse.height)
+			};
+
+			destRec = {
+				mouse_pointer.x,
+				mouse_pointer.y,
+				(float)(mouse.width),
+				(float)(mouse.height)
+			};
+
+			origin = {
+				(float)(mouse.width / 2),
+				(float)(mouse.height / 2)
+			};
+
+			rotation = 0;
+		}
+		void updateMouse() {
+			mouse_pointer = GetMousePosition();
+			rotation++;
+			destRec = {
+				mouse_pointer.x,
+				mouse_pointer.y,
+				(float)(mouse.width),
+				(float)(mouse.height)
+			};
+		}
+
+		void drawMouse() {
+			DrawTexturePro(mouse, sourceRec, destRec, origin, rotation, WHITE);
+		}
+
+		void deInitMouse() {
+			UnloadTexture(mouse);
 		}
 	}
 

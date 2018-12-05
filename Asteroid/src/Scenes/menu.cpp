@@ -53,6 +53,7 @@ namespace asteroid {
 		}
 
 		void update(bool &endGame) {
+			game::updateMouse();
 			mouse_point = GetMousePosition();
 
 			buttons::isMouseOverButton(play);
@@ -81,7 +82,7 @@ namespace asteroid {
 
 		void draw() {
 			ClearBackground(WHITE);
-
+			
 			//Draw UI
 			DrawTexture(menu_bg,0,0,WHITE);
 
@@ -90,6 +91,7 @@ namespace asteroid {
 			buttons::draw(credits);
 			buttons::draw(quit);
 			DrawText("v1.0", screenWidth - 50, screenHeight - 20, 20, WHITE);
+			game::drawMouse();
 		}
 
 		void deInit() {

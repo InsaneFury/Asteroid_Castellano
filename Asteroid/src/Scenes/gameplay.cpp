@@ -53,7 +53,7 @@ namespace asteroid {
 		}
 
 		void update(bool &isGameOver) {
-
+			game::updateMouse();
 			timer += GetFrameTime();
 			delayTime = 2.0f;
 
@@ -92,6 +92,7 @@ namespace asteroid {
 		}
 
 		void draw() {
+			
 			if (tutorial) {		
 				DrawTexture(gameplay_tutorial, 0, 0, WHITE);
 			}
@@ -144,7 +145,7 @@ namespace asteroid {
 			}
 				
 			
-
+			game::drawMouse();
 			BeginBlendMode(BLEND_MULTIPLIED);
 			DrawTexture(gameplay_vintage, 0, 0, WHITE);
 			EndBlendMode();
