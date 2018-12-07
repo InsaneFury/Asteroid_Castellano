@@ -90,7 +90,7 @@ namespace asteroid {
 			buttons::draw(play);
 			buttons::draw(credits);
 			buttons::draw(quit);
-			DrawText("v1.1", screenWidth - 50, screenHeight - 20, 20, WHITE);
+			DrawText("v1.2", screenWidth - 50, screenHeight - 20, 20, WHITE);
 			game::drawMouse();
 		}
 
