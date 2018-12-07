@@ -25,7 +25,6 @@ namespace asteroid {
 		static Vector2 U;
 		static Vector2 UNormalized;
 
-
 		void init() {
 
 			player.texture = LoadTexture("res/Textures/space_ship.png");
@@ -73,7 +72,7 @@ namespace asteroid {
 			gun::init();
 
 			//FrameTimeCounter
-			timer = GetFrameTime();
+			timer = 0;
 
 		}
 
@@ -92,8 +91,8 @@ namespace asteroid {
 				float modU = sqrt(pow(U.x, 2) + pow(U.y, 2));
 				UNormalized.x = U.x / modU;
 				UNormalized.y = U.y / modU;
-				player.acceleration.x += UNormalized.x;
-				player.acceleration.y += UNormalized.y;
+				player.acceleration.x += UNormalized.x * GetFrameTime();
+				player.acceleration.y += UNormalized.y * GetFrameTime();
 
 				isMoving = true;
 			}
@@ -101,8 +100,8 @@ namespace asteroid {
 				isMoving = false;
 			}
 			
-			player.position.x += player.acceleration.x* GetFrameTime();
-			player.position.y += player.acceleration.y* GetFrameTime();
+			player.position.x += player.acceleration.x  * GetFrameTime();
+			player.position.y += player.acceleration.y  * GetFrameTime();
 
 			// Collision logic: player vs walls
 			if (player.position.x > GetScreenWidth() + player.radius) {

@@ -28,6 +28,7 @@ namespace asteroid {
 		static Rectangle destRec;  
 		static Vector2 origin;   
 		static float rotation;  
+		static int rotationSpeed;
 
 		ActualScene actualScene = Menu;
 
@@ -59,7 +60,7 @@ namespace asteroid {
 			bgMusic = LoadMusicStream("res/Music/bgmusic.ogg");
 			#endif // !AUDIO
 
-			
+			rotationSpeed = 300;
 			//postprocessing::init();
 			menu::init();
 			gameplay::init();
@@ -176,7 +177,7 @@ namespace asteroid {
 		}
 		void updateMouse() {
 			mouse_pointer = GetMousePosition();
-			rotation++;
+			rotation += rotationSpeed * GetFrameTime();
 			destRec = {
 				mouse_pointer.x,
 				mouse_pointer.y,
