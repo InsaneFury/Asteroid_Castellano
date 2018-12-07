@@ -38,8 +38,8 @@ namespace asteroid {
 			player.color = WHITE;
 			player.acceleration = {0,0};
 			player.rotation = 0;
-			player.speed.x = 0;
-			player.speed.y = 0;
+			player.speed.x = 700.0f;
+			player.speed.y = 700.0f;
 			player.radius = (float)player.texture.width /2;
 			player.score = 0;
 			isMoving = false;
@@ -91,8 +91,8 @@ namespace asteroid {
 				float modU = sqrt(pow(U.x, 2) + pow(U.y, 2));
 				UNormalized.x = U.x / modU;
 				UNormalized.y = U.y / modU;
-				player.acceleration.x += UNormalized.x * GetFrameTime();
-				player.acceleration.y += UNormalized.y * GetFrameTime();
+				player.acceleration.x += UNormalized.x*player.speed.x*GetFrameTime();
+				player.acceleration.y += UNormalized.y*player.speed.y*GetFrameTime();
 
 				isMoving = true;
 			}
@@ -100,8 +100,8 @@ namespace asteroid {
 				isMoving = false;
 			}
 			
-			player.position.x += player.acceleration.x  * GetFrameTime();
-			player.position.y += player.acceleration.y  * GetFrameTime();
+			player.position.x += player.acceleration.x * GetFrameTime();
+			player.position.y += player.acceleration.y * GetFrameTime();
 
 			// Collision logic: player vs walls
 			if (player.position.x > GetScreenWidth() + player.radius) {
